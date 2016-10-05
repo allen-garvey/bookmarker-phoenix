@@ -1,0 +1,7 @@
+<h2>Edit bookmark</h2>
+
+<%= render "form.html", changeset: @changeset,
+						folders: @folders,
+                        action: bookmark_path(@conn, :update, @bookmark) %>
+
+<%= link "Back", to: bookmark_path(@conn, :index) %>

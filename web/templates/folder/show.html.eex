@@ -1,0 +1,21 @@
+<%= link "Back", to: folder_path(@conn, :index) %>
+<%= link "Edit", to: folder_path(@conn, :edit, @folder) %>
+<h2><%= @folder.name %></h2>
+
+<div>
+    <p><%= @folder.description %></p>
+</div>
+<ul>
+<%= for bookmark <- @bookmarks do %>
+	<li>
+		<div>
+			<a href="<%= bookmark.url %>"><%= bookmark.title %></a>
+			<%= link "Edit", to: bookmark_path(@conn, :edit, bookmark), class: "btn btn-default btn-xs" %>
+		</div>
+		<div><p><%= bookmark.description %></p></div>
+	</li>
+<% end %>
+</ul>
+
+
+

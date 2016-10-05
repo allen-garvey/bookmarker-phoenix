@@ -17,6 +17,8 @@ defmodule Bookmarker.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/folders", FolderController
+    resources "/bookmarks", BookmarkController
   end
 
   # Other scopes may use custom stacks.
