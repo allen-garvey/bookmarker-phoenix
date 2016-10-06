@@ -1,7 +1,7 @@
 <h2>Folders</h2>
-<%= link "Add folder", to: folder_path(@conn, :new) %>
+<%= link "Add folder", to: folder_path(@conn, :new), class: "btn btn-xs btn-success" %>
 
-<table class="table">
+<table class="table index-table">
   <thead>
     <tr>
       <th>Name</th>
