@@ -1,6 +1,6 @@
 <div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <h1>Welcome to Bookmarker!</h1>
+  <p class="lead">A place for you and all your bookmarks.</p>
 </div>
 
 <div class="row marketing">
@@ -20,7 +20,7 @@
   </div>
 
   <div class="col-lg-6">
-    <h4>Help</h4>
+    <h4>Shortcuts</h4>
     <ul>
       <li>
         <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
