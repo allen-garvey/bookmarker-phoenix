@@ -1,23 +1,20 @@
-<h2>Show bookmark</h2>
+<div class="show-header-links-container">
+  <%= link "Back", to: bookmark_path(@conn, :index) %>
+  <%= link "Edit", to: bookmark_path(@conn, :edit, @bookmark) %>
+</div>
+<h2><%= @bookmark.title %></h2>
 
 <ul>
-
-  <li>
-    <strong>Title:</strong>
-    <%= @bookmark.title %>
-  </li>
-
   <li>
     <strong>Url:</strong>
-    <%= @bookmark.url %>
+    <a href="<%= @bookmark.url %>"><%= @bookmark.url %></a>
   </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @bookmark.description %>
-  </li>
+  
+  <%= if @bookmark.description != nil do %>
+    <li>
+      <strong>Description:</strong>
+      <%= @bookmark.description %>
+    </li>
+  <% end %>
 
 </ul>
-
-<%= link "Edit", to: bookmark_path(@conn, :edit, @bookmark) %>
-<%= link "Back", to: bookmark_path(@conn, :index) %>
