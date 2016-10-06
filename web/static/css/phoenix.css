@@ -22,6 +22,9 @@ form.link, form.button {
   display: inline;
 }
 
+/*
+* Header and Nav
+*/
 /* Custom page header */
 .header {
 	padding-top: 1em;
@@ -37,19 +40,6 @@ form.link, form.button {
 	align-items: baseline;
 }
 .logo {
-/*  width: 519px;
-  height: 71px;
-  display: inline-block;
-  margin-bottom: 1em;
-  background-image: url("/images/phoenix.png");
-  background-size: 519px 71px;*/
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing {
-  padding-right: 15px;
-  padding-left: 15px;
 }
 
 
@@ -57,6 +47,9 @@ form.link, form.button {
   margin: 30px 0;
 }
 
+/*
+* Home page
+*/
 /* Main marketing message */
 .jumbotron {
   text-align: center;
@@ -67,3 +60,44 @@ form.link, form.button {
 .marketing {
   margin: 35px 0;
 }
+
+/*
+* Show pages
+*/
+.show-header-links-container a:first-child{
+	margin-right: 14em;
+}
+
+/*Folder Show page*/
+.folder-bookmark-list{
+	list-style-type: none;
+	padding-left: 0;
+}
+.folder-bookmark-container{
+	margin-bottom: 1em;
+}
+.folder-bookmark-container .bookmark-url, 
+.folder-bookmark-container .bookmark-description{
+	font-size: 0.9em;
+}
+.folder-bookmark-container .bookmark-url{
+	color: #888;
+}
+
+/*
+* Index pages
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
