@@ -1,21 +1,31 @@
-<%= link "Back", to: folder_path(@conn, :index) %>
-<%= link "Edit", to: folder_path(@conn, :edit, @folder) %>
+<div class="show-header-links-container">
+	<%= link "Back", to: folder_path(@conn, :index) %>
+	<%= link "Edit", to: folder_path(@conn, :edit, @folder) %>
+</div>
 <h2><%= @folder.name %></h2>
 
-<div>
-    <p><%= @folder.description %></p>
-</div>
-<ul>
-<%= for bookmark <- @bookmarks do %>
-	<li>
-		<div>
-			<a href="<%= bookmark.url %>"><%= bookmark.title %></a>
-			<%= link "Edit", to: bookmark_path(@conn, :edit, bookmark), class: "btn btn-default btn-xs" %>
-		</div>
-		<div><p><%= bookmark.description %></p></div>
-	</li>
+<%= if @folder.description != nil do %>
+	<div>
+	    <p><%= @folder.description %></p>
+	</div>
 <% end %>
-</ul>
+<div>
+	<h4>Bookmarks</h4>
+	<ul class="folder-bookmark-list">
+	<%= for bookmark <- @bookmarks do %>
+		<li class="folder-bookmark-container">
+			<div>
+				<%= link bookmark.title, to: bookmark_path(@conn, :show, bookmark) %>
+				<%= link "Visit", to: bookmark.url, class: "btn btn-primary btn-xs" %>
+			</div>
+			<div class="bookmark-url"><%= bookmark.url %></div>
+			<%= if bookmark.description != nil do %>
+				<div class="bookmark-description"><p><%= bookmark.description %></p></div>
+			<% end %>
+		</li>
+	<% end %>
+	</ul>
+</div>
 
 
 
