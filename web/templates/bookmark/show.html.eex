@@ -1,15 +1,14 @@
-<div class="show-header-links-container">
-  <%= link "Back", to: bookmark_path(@conn, :index) %>
-  <%= link "Edit", to: bookmark_path(@conn, :edit, @bookmark) %>
-</div>
-<h2><%= @bookmark.title %></h2>
+<%= render Bookmarker.SharedView, "show_heading.html", heading: @bookmark.title, back_path: bookmark_path(@conn, :index), edit_path: bookmark_path(@conn, :edit, @bookmark) %>
 
-<ul>
+<ul class="show-attribute-list">
+  <li>
+    <strong>Folder:</strong>
+    <%= link Bookmarker.Folder.to_s(@bookmark.folder), to: folder_path(@conn, :show, @bookmark.folder) %>
+  </li>
   <li>
     <strong>Url:</strong>
     <a href="<%= @bookmark.url %>"><%= @bookmark.url %></a>
   </li>
-  
   <%= if @bookmark.description != nil do %>
     <li>
       <strong>Description:</strong>
