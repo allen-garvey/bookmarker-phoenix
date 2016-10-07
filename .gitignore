@@ -1,3 +1,6 @@
+# OS specific files to ignore
+.DS_Store
+
 # App artifacts
 /_build
 /db
