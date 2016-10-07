@@ -1,26 +1,16 @@
-<h2>Folders</h2>
-<%= link "Add folder", to: folder_path(@conn, :new), class: "btn btn-xs btn-success" %>
+<%= render Bookmarker.SharedView, "index_heading.html", item_name: "folder", new_path: folder_path(@conn, :new) %>
 
-<table class="table index-table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
+<%= render Bookmarker.SharedView, "index_table_header.html", headings: ["Name", "Description"] %>
+    <%= for folder <- @folders do %>
+        <tr>
+          <td><%= link Bookmarker.Folder.to_s(folder), to: folder_path(@conn, :show, folder) %></td>
+          <td><%= folder.description %></td>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for folder <- @folders do %>
-    <tr>
-      <td><%= link folder.name, to: folder_path(@conn, :show, folder) %></td>
-      <td><%= folder.description %></td>
-
-      <td class="text-right">
-        <%= link "Edit", to: folder_path(@conn, :edit, folder), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: folder_path(@conn, :delete, folder), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
+          <td class="text-right">
+            <%= link "Edit", to: folder_path(@conn, :edit, folder), class: "btn btn-default btn-xs" %>
+            <%= link "Delete", to: folder_path(@conn, :delete, folder), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+          </td>
+        </tr>
+    <% end %>
   </tbody>
 </table>
