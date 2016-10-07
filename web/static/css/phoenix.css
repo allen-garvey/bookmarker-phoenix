@@ -64,23 +64,26 @@ form.link, form.button {
 /*
 * Show pages
 */
-.show-header-links-container a:first-child{
-	margin-right: 14em;
+.show-heading{
+	display: inline-block;
+	vertical-align: bottom;
+	margin: 5px 1em 0 0;
 }
-
-/*Folder Show page*/
-.folder-bookmark-list{
+.show-attribute-list{
 	list-style-type: none;
 	padding-left: 0;
 }
-.folder-bookmark-container{
-	margin-bottom: 1em;
+.show-attribute-list li{
+	margin-bottom: 0.5em;
 }
-.folder-bookmark-container .bookmark-url, 
-.folder-bookmark-container .bookmark-description{
+
+/*Folder Show page*/
+
+.bookmark-url, 
+.folder-bookmark-list .bookmark-description{
 	font-size: 0.9em;
 }
-.folder-bookmark-container .bookmark-url{
+.bookmark-url{
 	color: #888;
 }
 
