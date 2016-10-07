@@ -17,5 +17,7 @@ defmodule Bookmarker.Bookmark do
     struct
     |> cast(params, [:title, :url, :description, :folder_id])
     |> validate_required([:title, :url, :folder_id])
+    |> foreign_key_constraint(:folder_id)
+    |> assoc_constraint(:folder) #validate folder exists
   end
 end
