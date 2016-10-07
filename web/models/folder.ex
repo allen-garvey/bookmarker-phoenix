@@ -17,4 +17,11 @@ defmodule Bookmarker.Folder do
     |> cast(params, [:name, :description])
     |> validate_required([:name])
   end
+
+  @doc """
+  Returns string representation of model
+  """
+  def to_s(folder) do
+    folder.name
+  end 
 end
