@@ -1,30 +1,33 @@
-<div class="show-header-links-container">
-	<%= link "Back", to: folder_path(@conn, :index) %>
-	<%= link "Edit", to: folder_path(@conn, :edit, @folder) %>
-</div>
-<h2><%= @folder.name %></h2>
+<%= render Bookmarker.SharedView, "show_heading.html", heading: Bookmarker.Folder.to_s(@folder), back_path: folder_path(@conn, :index), edit_path: folder_path(@conn, :edit, @folder) %>
 
-<%= if @folder.description != nil do %>
-	<div>
-	    <p><%= @folder.description %></p>
-	</div>
-<% end %>
-<div>
-	<h4>Bookmarks</h4>
-	<ul class="folder-bookmark-list">
-	<%= for bookmark <- @bookmarks do %>
-		<li class="folder-bookmark-container">
-			<div>
-				<%= link bookmark.title, to: bookmark_path(@conn, :show, bookmark) %>
-				<%= link "Visit", to: bookmark.url, class: "btn btn-primary btn-xs" %>
-			</div>
-			<div class="bookmark-url"><%= bookmark.url %></div>
-			<%= if bookmark.description != nil do %>
-				<div class="bookmark-description"><p><%= bookmark.description %></p></div>
-			<% end %>
+<ul class="show-attribute-list">
+	<%= if @folder.description != nil do %>
+		<li>
+			<strong>Description:</strong>
+		    <%= @folder.description %>
 		</li>
 	<% end %>
-	</ul>
+</ul>
+<div>
+	<%= if length(@folder.bookmarks) == 0 do %>
+		This folder is empty.
+	<% else %>
+		<ul class="list-group folder-bookmark-list">
+		<li class="list-group-item list-group-item-info"><h4>Bookmarks</h4></li>
+		<%= for bookmark <- @folder.bookmarks do %>
+			<li class="list-group-item">
+				<div>
+					<%= link bookmark.title, to: bookmark_path(@conn, :show, bookmark) %>
+					<%= link "Visit", to: bookmark.url, class: "btn btn-primary btn-sm pull-right" %>
+				</div>
+				<div class="bookmark-url"><%= bookmark.url %></div>
+				<%= if bookmark.description != nil do %>
+					<div class="bookmark-description"><p><%= bookmark.description %></p></div>
+				<% end %>
+			</li>
+		<% end %>
+		</ul>
+	<% end %>
 </div>
 
 
