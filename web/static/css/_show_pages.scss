@@ -1,0 +1,27 @@
+
+
+/*
+* Show pages
+*/
+.show-heading{
+	display: inline-block;
+	vertical-align: bottom;
+	margin: 5px 1em 0 0;
+}
+.show-attribute-list{
+	list-style-type: none;
+	padding-left: 0;
+}
+.show-attribute-list li{
+	margin-bottom: 0.5em;
+}
+
+/*Folder Show page*/
+
+.bookmark-url, 
+.folder-bookmark-list .bookmark-description{
+	font-size: 0.9em;
+}
+.bookmark-url{
+	color: #888;
+}
