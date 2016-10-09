@@ -1,6 +1,10 @@
 # OS specific files to ignore
 .DS_Store
 
+# Sublime artifacts
+*.sublime-project
+*.sublime-workspace
+
 # App artifacts
 /_build
 /db
