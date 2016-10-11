@@ -24,4 +24,11 @@ defmodule Bookmarker.Folder do
   def to_s(folder) do
     folder.name
   end 
+  
+  @doc """
+  Returns all folders in Repo in sorted order
+  """
+  def all_in_order_query() do
+    from(f in Bookmarker.Folder, order_by: f.name)
+  end 
 end
