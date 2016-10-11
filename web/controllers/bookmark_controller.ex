@@ -10,7 +10,7 @@ defmodule Bookmarker.BookmarkController do
 
   def new(conn, _params) do
     changeset = Bookmark.changeset(%Bookmark{})
-    folders = Repo.all(Bookmarker.Folder) |> Enum.map(&{&1.name, &1.id})
+    folders = Bookmarker.Folder.form_list(Repo)
     render(conn, "new.html", changeset: changeset, folders: folders)
   end
 
@@ -23,7 +23,7 @@ defmodule Bookmarker.BookmarkController do
         |> put_flash(:info, "Bookmark created successfully.")
         |> redirect(to: bookmark_path(conn, :index))
       {:error, changeset} ->
-        folders = Repo.all(Bookmarker.Folder) |> Enum.map(&{&1.name, &1.id})
+        folders = Bookmarker.Folder.form_list(Repo)
         render(conn, "new.html", changeset: changeset, folders: folders)
     end
   end
@@ -36,7 +36,7 @@ defmodule Bookmarker.BookmarkController do
   def edit(conn, %{"id" => id}) do
     bookmark = Repo.get!(Bookmark, id)
     changeset = Bookmark.changeset(bookmark)
-    folders = Repo.all(Bookmarker.Folder) |> Enum.map(&{&1.name, &1.id})
+    folders = Bookmarker.Folder.form_list(Repo)
     render(conn, "edit.html", bookmark: bookmark, changeset: changeset, folders: folders)
   end
 
@@ -50,7 +50,7 @@ defmodule Bookmarker.BookmarkController do
         |> put_flash(:info, "Bookmark updated successfully.")
         |> redirect(to: bookmark_path(conn, :show, bookmark))
       {:error, changeset} ->
-        folders = Repo.all(Bookmarker.Folder) |> Enum.map(&{&1.name, &1.id})
+        folders = Bookmarker.Folder.form_list(Repo)
         render(conn, "edit.html", bookmark: bookmark, changeset: changeset, folders: folders)
     end
   end
@@ -66,4 +66,5 @@ defmodule Bookmarker.BookmarkController do
     |> put_flash(:info, "Bookmark deleted successfully.")
     |> redirect(to: bookmark_path(conn, :index))
   end
+
 end
