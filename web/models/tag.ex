@@ -3,7 +3,7 @@ defmodule Bookmarker.Tag do
 
   schema "tags" do
     field :name, :string
-    many_to_many :bookmarks, Bookmarker.Bookmark, join_through: "bookmarks_tags"
+    many_to_many :bookmarks, Bookmarker.Bookmark, join_through: "bookmarks_tags", on_delete: :delete_all
 
     timestamps()
   end

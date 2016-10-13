@@ -6,7 +6,7 @@ defmodule Bookmarker.Bookmark do
     field :url, :string
     field :description, :string
     belongs_to :folder, Bookmarker.Folder
-    many_to_many :tags, Bookmarker.Tag, join_through: "bookmarks_tags"
+    many_to_many :tags, Bookmarker.Tag, join_through: "bookmarks_tags", on_delete: :delete_all
 
     timestamps()
   end
