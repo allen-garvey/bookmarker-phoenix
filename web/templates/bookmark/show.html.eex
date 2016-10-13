@@ -17,3 +17,18 @@
   <% end %>
 
 </ul>
+
+<div>
+  <ul class="list-group">
+  <li class="list-group-item list-group-item-info">
+    <h4>Tags</h4>
+  </li>
+  <%= for tag <- @bookmark.tags do %>
+    <li class="list-group-item">
+      <div>
+        <%= link tag.name, to: tag_path(@conn, :show, tag) %>
+      </div>
+    </li>
+  <% end %>
+  </ul>
+</div>

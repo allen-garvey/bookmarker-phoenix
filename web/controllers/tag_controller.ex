@@ -27,7 +27,7 @@ defmodule Bookmarker.TagController do
   end
 
   def show(conn, %{"id" => id}) do
-    tag = Repo.get!(Tag, id)
+    tag = Repo.get!(Tag, id) |> Repo.preload([:bookmarks])
     render(conn, "show.html", tag: tag)
   end
 

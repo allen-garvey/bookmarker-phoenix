@@ -29,7 +29,7 @@ defmodule Bookmarker.BookmarkController do
   end
 
   def show(conn, %{"id" => id}) do
-    bookmark = Repo.get!(Bookmark, id) |> Repo.preload([:folder])
+    bookmark = Repo.get!(Bookmark, id) |> Repo.preload([:folder, :tags])
     render(conn, "show.html", bookmark: bookmark)
   end
 
