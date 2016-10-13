@@ -16,6 +16,7 @@ defmodule Bookmarker.Folder do
     struct
     |> cast(params, [:name, :description])
     |> validate_required([:name])
+    |> unique_constraint(:name)
   end
 
   @doc """
