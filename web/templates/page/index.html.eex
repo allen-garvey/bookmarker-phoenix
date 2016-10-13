@@ -25,6 +25,9 @@
       <li>
         <%= link "Add bookmark", to: bookmark_path(@conn, :new) %>
       </li>
+      <li>
+        <%= link "Bookmarks Tags", to: bookmark_tag_path(@conn, :index) %>
+      </li>
     </ul>
   </div>
 </div>
