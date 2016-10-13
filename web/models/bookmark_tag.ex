@@ -19,5 +19,6 @@ defmodule Bookmarker.BookmarkTag do
     |> foreign_key_constraint(:tag_id)
     |> assoc_constraint(:bookmark) #validate existence
     |> assoc_constraint(:tag) #validate existence
+    |> unique_constraint(:bookmark_tag_composite, name: :bookmark_tag_composite)
   end
 end
