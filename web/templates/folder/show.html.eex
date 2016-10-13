@@ -8,27 +8,8 @@
 		</li>
 	<% end %>
 </ul>
-<div>
-	<%= if length(@folder.bookmarks) == 0 do %>
-		This folder is empty.
-	<% else %>
-		<ul class="list-group folder-bookmark-list">
-		<li class="list-group-item list-group-item-info"><h4>Bookmarks</h4></li>
-		<%= for bookmark <- @folder.bookmarks do %>
-			<li class="list-group-item">
-				<div>
-					<%= link bookmark.title, to: bookmark_path(@conn, :show, bookmark) %>
-					<%= link "Visit", to: bookmark.url, class: "btn btn-primary btn-sm pull-right" %>
-				</div>
-				<div class="bookmark-url"><%= bookmark.url %></div>
-				<%= if bookmark.description != nil do %>
-					<div class="bookmark-description"><p><%= bookmark.description %></p></div>
-				<% end %>
-			</li>
-		<% end %>
-		</ul>
-	<% end %>
-</div>
+
+<%= render Bookmarker.SharedView, "related_bookmarks_list.html", bookmarks: @folder.bookmarks, no_bookmarks_message: "This folder is empty.", conn: @conn %>
 
 
 
