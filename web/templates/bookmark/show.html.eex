@@ -1,4 +1,4 @@
-<%= render Bookmarker.SharedView, "show_heading.html", heading: @bookmark.title, back_path: bookmark_path(@conn, :index), edit_path: bookmark_path(@conn, :edit, @bookmark) %>
+<%= render Bookmarker.SharedView, "show_heading.html", heading: @bookmark.title, back_path: bookmark_path(@conn, :index), edit_path: bookmark_path(@conn, :edit, @bookmark), model_name_plural: "bookmarks" %>
 
 <ul class="show-attribute-list">
   <li>

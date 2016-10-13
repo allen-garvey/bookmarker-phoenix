@@ -1,5 +1,5 @@
 <div>
-	<%= link "Back", to: @back_path %>
+	<%= link "All " <> @model_name_plural, to: @back_path %>
 </div>
 <div class="show-header">
 	<h2 class="show-heading"><%= @heading %></h2>

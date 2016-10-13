@@ -1,4 +1,4 @@
-<%= render Bookmarker.SharedView, "show_heading.html", heading: Bookmarker.Folder.to_s(@folder), back_path: folder_path(@conn, :index), edit_path: folder_path(@conn, :edit, @folder) %>
+<%= render Bookmarker.SharedView, "show_heading.html", heading: Bookmarker.Folder.to_s(@folder), back_path: folder_path(@conn, :index), edit_path: folder_path(@conn, :edit, @folder), model_name_plural: "folders" %>
 
 <ul class="show-attribute-list">
 	<%= if @folder.description != nil do %>
