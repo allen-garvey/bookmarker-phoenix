@@ -3,6 +3,7 @@ defmodule Bookmarker.Tag do
 
   schema "tags" do
     field :name, :string
+    many_to_many :bookmarks, Bookmarker.Bookmark, join_through: "bookmarks_tags"
 
     timestamps()
   end
@@ -14,5 +15,21 @@ defmodule Bookmarker.Tag do
     struct
     |> cast(params, [:name])
     |> validate_required([:name])
+  end
+
+  @doc """
+  Returns all tags in Repo in sorted order
+  """
+  def all_in_order_query() do
+    from(t in Bookmarker.Tag, order_by: t.name)
+  end 
+
+  @doc """
+  Returns list of tags with name and id
+  ordered in default order suitable for select fields
+  for forms
+  """
+  def form_list(repo) do
+    repo.all(Bookmarker.Tag.all_in_order_query()) |> Enum.map(&{&1.name, &1.id})
   end
 end

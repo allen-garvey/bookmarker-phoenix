@@ -20,6 +20,7 @@ defmodule Bookmarker.Router do
     resources "/folders", FolderController
     resources "/bookmarks", BookmarkController
     resources "/tags", TagController
+    resources "/bookmarks_tags", BookmarkTagController
   end
 
   # Other scopes may use custom stacks.

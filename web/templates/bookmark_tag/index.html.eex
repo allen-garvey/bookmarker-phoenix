@@ -1,0 +1,17 @@
+<%= render Bookmarker.SharedView, "index_heading.html", item_name: "bookmarks tag", new_path: bookmark_tag_path(@conn, :new) %>
+
+<%= render Bookmarker.SharedView, "index_table_header.html", headings: ["Bookmark", "Tag"] %>
+    <%= for bookmark_tag <- @bookmarks_tags do %>
+        <tr>
+          <td><%= bookmark_tag.bookmark_id %></td>
+          <td><%= bookmark_tag.tag_id %></td>
+
+          <td class="text-right">
+            <%= link "Show", to: bookmark_tag_path(@conn, :show, bookmark_tag), class: "btn btn-default btn-xs" %>
+            <%= link "Edit", to: bookmark_tag_path(@conn, :edit, bookmark_tag), class: "btn btn-default btn-xs" %>
+            <%= link "Delete", to: bookmark_tag_path(@conn, :delete, bookmark_tag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+          </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
