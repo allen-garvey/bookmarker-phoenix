@@ -4,12 +4,12 @@
 
   <li>
     <strong>Bookmark:</strong>
-    <%= @bookmark_tag.bookmark.title %>
+    <%= link @bookmark_tag.bookmark.title, to: bookmark_path(@conn, :show, @bookmark_tag.bookmark) %>
   </li>
 
   <li>
     <strong>Tag:</strong>
-    <%= @bookmark_tag.tag.name %>
+    <%= link @bookmark_tag.tag.name, to: tag_path(@conn, :show, @bookmark_tag.tag) %>
   </li>
 
 </ul>
