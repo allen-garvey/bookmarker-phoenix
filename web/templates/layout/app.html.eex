@@ -19,7 +19,7 @@
           <ul class="nav">
             <li><%= link "Folders", to: folder_path(@conn, :index) %></li>
             <li><%= link "Bookmarks", to: bookmark_path(@conn, :index) %></li>
-            <li><%= link "Tags", to: "/" %></li>
+            <li><%= link "Tags", to: tag_path(@conn, :index) %></li>
           </ul>
         </nav>
       </header>

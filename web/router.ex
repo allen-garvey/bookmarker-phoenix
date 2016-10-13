@@ -19,6 +19,7 @@ defmodule Bookmarker.Router do
     get "/", PageController, :index
     resources "/folders", FolderController
     resources "/bookmarks", BookmarkController
+    resources "/tags", TagController
   end
 
   # Other scopes may use custom stacks.

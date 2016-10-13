@@ -1,0 +1,1 @@
+<%= render Bookmarker.SharedView, "show_heading.html", heading: @tag.name, back_path: tag_path(@conn, :index), edit_path: tag_path(@conn, :edit, @tag) %>
