@@ -39,6 +39,6 @@ defmodule Bookmarker.Folder do
   for forms
   """
   def form_list(repo) do
-    repo.all(Bookmarker.Folder.all_in_order_query()) |> Enum.map(&{&1.name, &1.id})
+    repo.all(all_in_order_query()) |> Enum.map(&{&1.name, &1.id})
   end
 end
