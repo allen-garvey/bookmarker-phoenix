@@ -23,6 +23,13 @@ defmodule Bookmarker.Router do
     resources "/bookmarks_tags", BookmarkTagController
   end
 
+  #JSON API
+  scope "/api", Bookmarker do
+    pipe_through :api
+
+    get "/tags/bookmark/:bookmark_id/unused", ApiTagController, :unused_tags_for_bookmark
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Bookmarker do
   #   pipe_through :api
