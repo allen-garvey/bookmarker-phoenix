@@ -31,6 +31,6 @@ defmodule Bookmarker.Tag do
   for forms
   """
   def form_list(repo) do
-    repo.all(Bookmarker.Tag.all_in_order_query()) |> Enum.map(&{&1.name, &1.id})
+    repo.all(all_in_order_query()) |> Enum.map(&{&1.name, &1.id})
   end
 end
