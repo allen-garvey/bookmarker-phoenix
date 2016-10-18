@@ -5,9 +5,9 @@ defmodule Bookmarker.ApiBookmarkTagView do
   Returns JSON object for newly created bookmark_tag
   http://jsonapi.org/ json api v1.0 format specification 
   """
-  def render("new_bookmark_tag.json", %{bookmark_tag: bookmark_tag}) do
+  def render("new_bookmark_tag.json", %{bookmark_tag: bookmark_tag, tag: tag}) do
     %{
-      data: bookmark_tag_json(bookmark_tag)
+      data: bookmark_tag_json(bookmark_tag, tag)
     }
   end
 
@@ -32,13 +32,14 @@ defmodule Bookmarker.ApiBookmarkTagView do
     }
   end
 
-  def bookmark_tag_json(bookmark_tag) do
+  def bookmark_tag_json(bookmark_tag, tag) do
     %{
       id: Integer.to_string(bookmark_tag.id),
       type: "bookmark_tag",
       attributes: %{
         bookmark_id: Integer.to_string(bookmark_tag.bookmark_id),
-        tag_id: Integer.to_string(bookmark_tag.tag_id)
+        tag_id: Integer.to_string(bookmark_tag.tag_id),
+        tag: Bookmarker.ApiTagView.tag_json(tag)
       }
     }
   end

@@ -12,7 +12,8 @@ defmodule Bookmarker.ApiBookmarkTagController do
 
     case Repo.insert(changeset) do
       {:ok, bookmark_tag} ->
-        render(conn, "new_bookmark_tag.json", bookmark_tag: bookmark_tag)
+        tag = Repo.get!(Bookmarker.Tag, bookmark_tag.tag_id)
+        render(conn, "new_bookmark_tag.json", bookmark_tag: bookmark_tag, tag: tag)
       {:error, changeset} ->
         render(conn, "create_error.json", errors: changeset.errors)
     end
