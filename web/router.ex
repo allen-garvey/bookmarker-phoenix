@@ -28,6 +28,7 @@ defmodule Bookmarker.Router do
     pipe_through :api
 
     get "/tags/bookmark/:bookmark_id/unused", ApiTagController, :unused_tags_for_bookmark
+    post "/bookmarks_tags/", ApiBookmarkTagController, :create_bookmark_tag
   end
 
   # Other scopes may use custom stacks.
