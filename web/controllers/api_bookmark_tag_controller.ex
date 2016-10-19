@@ -15,7 +15,9 @@ defmodule Bookmarker.ApiBookmarkTagController do
         tag = Repo.get!(Bookmarker.Tag, bookmark_tag.tag_id)
         render(conn, "new_bookmark_tag.json", bookmark_tag: bookmark_tag, tag: tag)
       {:error, changeset} ->
-        render(conn, "create_error.json", errors: changeset.errors)
+        conn
+        |> put_status(400)
+        |> render("create_error.json", errors: changeset.errors)
     end
   end
 
@@ -23,7 +25,9 @@ defmodule Bookmarker.ApiBookmarkTagController do
   Creates a bookmark tag for given bookmark_id and tag_id
   """
   def create_bookmark_tag(conn, _params) do
-    render(conn, "create_error.json", error: %{title: "Invalid params", detail: "Missing bookmark_id or tag_id"})
+    conn
+    |> put_status(400)
+    |> render("create_error.json", error: %{title: "Invalid params", detail: "Missing bookmark_id or tag_id"})
   end
 
 end
