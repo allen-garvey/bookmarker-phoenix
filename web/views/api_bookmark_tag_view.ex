@@ -12,11 +12,21 @@ defmodule Bookmarker.ApiBookmarkTagView do
   end
 
   @doc """
+  Returns JSON object for deleted bookmark_tag
+  http://jsonapi.org/ json api v1.0 format specification 
+  """
+  def render("delete_bookmark_tag.json", %{bookmark_tag: bookmark_tag}) do
+    %{
+      data: bookmark_tag_json(bookmark_tag, bookmark_tag.tag)
+    }
+  end
+
+  @doc """
   Returns error response when 
   invalid params for creating bookmark_tag
   http://jsonapi.org/ json api v1.0 format specification 
   """
-  def render("create_error.json", %{error: error}) do
+  def render("error.json", %{error: error}) do
     %{
       errors: [error]
     }
