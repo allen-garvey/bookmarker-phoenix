@@ -19,16 +19,18 @@
 </ul>
 
 <div>
-  <ul class="list-group">
-  <li class="list-group-item list-group-item-info">
-    <h4>Tags</h4>
-  </li>
-  <%= for tag <- @bookmark.tags do %>
-    <li class="list-group-item">
-      <div>
-        <%= link tag.name, to: tag_path(@conn, :show, tag) %>
-      </div>
+  <ul class="list-group tag-list">
+    <li class="list-group-item list-group-item-info">
+      <h4>Tags</h4>
+      <div><button class="btn btn-success" data-role="add-tag-button">Add</button></div>
     </li>
-  <% end %>
+    <%= for tag <- @bookmark.tags do %>
+      <li class="list-group-item" data-tag-id="<%= tag.id %>">
+        <div>
+          <%= link tag.name, to: tag_path(@conn, :show, tag) %>
+        </div>
+        <div><button class="btn btn-danger btn-xs" data-role="remove-tag-button">Remove</button></div>
+      </li>
+    <% end %>
   </ul>
 </div>
