@@ -25,3 +25,17 @@
 .bookmark-url{
 	color: #888;
 }
+
+
+/*Bookmark Show Page*/
+.tag-list{
+	li.list-group-item{
+		display: flex;
+		justify-content: space-between;
+	}
+	li.list-group-item:not(:first-child){
+		padding-top: 1em;
+		padding-bottom: 1em;
+	}
+}
+
