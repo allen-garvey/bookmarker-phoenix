@@ -26,10 +26,15 @@
         <div><button class="btn btn-success" data-role="add-tag-button">Add</button></div>
       </div>
       <div class="add-tag-container">
-        <select class="form-control"></select>
-        <div>
-          <button class="btn btn-default" data-role="cancel-tag-button">Cancel</button>
-          <button class="btn btn-success" data-role="save-tag-button">Save</button>
+        <div class="add-tag-select-container">
+          <select class="form-control tag-select"></select>
+          <div>
+            <button class="btn btn-default" data-role="cancel-tag-button">Cancel</button>
+            <button class="btn btn-success" data-role="save-tag-button">Save</button>
+          </div>
+        </div>
+        <div class="add-tag-alert alert alert-warning">
+          This bookmark has already been tagged with all available tags. <%= link "Want to create more?", to: tag_path(@conn, :new) %>
         </div>
       </div>
     </li>

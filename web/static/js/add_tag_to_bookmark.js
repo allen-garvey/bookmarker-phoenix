@@ -8,6 +8,8 @@ AddTagToBookmark.init = function($){
 	var tagSelectTag = $('.add-tag-container select');
 	var tagListItemTemplate = $.template($('#add_tag_tag_item_template').html());
 	var tagList = $('.tag-list');
+	var addTagContainer = $('.add-tag-container');
+	var addTagButton = $('[data-role="add-tag-button"]');
 
 	//populate and show tag select form
 	$('[data-role="add-tag-button"]').on('click', function(e){
@@ -26,14 +28,18 @@ AddTagToBookmark.init = function($){
 						tagSelectTag.append(tagOptionTemplate.render({id: tag.id, name: tag.attributes.name}));
 					}
 				);
-				$('.add-tag-container').show();
+				if(response.data.length == 0){
+					addTagContainer.addClass('error');
+				}
+
+				addTagContainer.show();
 			}
 		});
 	});
 	//reset tag select and add button
 	function resetAddTagForm(){
-		$('[data-role="add-tag-button"]').show();
-		$('.add-tag-container').hide();
+		addTagButton.show();
+		addTagContainer.hide();
 	}
 
 	//cancel adding tag
