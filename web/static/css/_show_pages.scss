@@ -53,3 +53,12 @@
 	}
 }
 
+@media screen and (max-width: 1000px){
+	.add-tag-select-container{
+		flex-direction: column;
+	}
+	.tag-select{
+		margin-bottom: 1em;
+	}
+}
+
