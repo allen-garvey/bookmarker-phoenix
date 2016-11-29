@@ -6,9 +6,6 @@ exports.config = {
       // order: {
       //   after: ["web/static/css/app.css"] // concat app.css last
       // }
-    },
-    templates: {
-      joinTo: "js/app.js"
     }
   },
 
@@ -33,19 +30,12 @@ exports.config = {
 
   // Configure your plugins
   plugins: {
-    babel: {
-      // Do not use ES6 compiler in vendor code
-      ignore: [/web\/static\/vendor/]
-    },
     sass: {
       mode: "native"
     }
   },
 
   modules: {
-    autoRequire: {
-      "js/app.js": ["web/static/js/app"]
-    }
   },
 
   npm: {
