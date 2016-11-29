@@ -18,7 +18,7 @@
 
 </ul>
 
-<div>
+<div data-bookmark-id="<%= @bookmark.id %>">
   <ul class="list-group tag-list">
     <li class="list-group-item list-group-item-info">
       <div class="tag-list-header">
@@ -45,4 +45,12 @@
 </div>
 <script type="text/template" id="add_tag_option_template">
   <option value="{{id}}">{{name}}</option>
+</script>
+<script type="text/template" id="add_tag_tag_item_template">
+  <li class="list-group-item" data-tag-id="{{tagId}}">
+    <div>
+      <a href="/tags/{{tagId}}">{{tagName}}</a>
+    </div>
+    <div><button class="btn btn-danger btn-xs" data-role="remove-tag-button">Remove</button></div>
+  </li>
 </script>
