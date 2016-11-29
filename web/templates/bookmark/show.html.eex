@@ -33,7 +33,7 @@
         </div>
       </div>
     </li>
-    <%= for tag <- @bookmark.tags do %>
+    <%= for tag <- Enum.sort_by(@bookmark.tags, fn(tag) -> tag.name end) do %>
       <li class="list-group-item" data-tag-id="<%= tag.id %>">
         <div>
           <%= link tag.name, to: tag_path(@conn, :show, tag) %>
