@@ -29,13 +29,16 @@
 
 /*Bookmark Show Page*/
 .tag-list{
-	li.list-group-item{
+	li.list-group-item:not(.list-group-item-info), .tag-list-header{
 		display: flex;
 		justify-content: space-between;
 	}
 	li.list-group-item:not(:first-child){
 		padding-top: 1em;
 		padding-bottom: 1em;
+	}
+	.add-tag-container{
+		display: none;
 	}
 }
 

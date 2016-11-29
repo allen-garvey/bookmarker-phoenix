@@ -21,8 +21,17 @@
 <div>
   <ul class="list-group tag-list">
     <li class="list-group-item list-group-item-info">
-      <h4>Tags</h4>
-      <div><button class="btn btn-success" data-role="add-tag-button">Add</button></div>
+      <div class="tag-list-header">
+        <h4>Tags</h4>
+        <div><button class="btn btn-success" data-role="add-tag-button">Add</button></div>
+      </div>
+      <div class="add-tag-container">
+        <select class="form-control"></select>
+        <div>
+          <button class="btn btn-default" data-role="cancel-tag-button">Cancel</button>
+          <button class="btn btn-success" data-role="save-tag-button">Save</button>
+        </div>
+      </div>
     </li>
     <%= for tag <- @bookmark.tags do %>
       <li class="list-group-item" data-tag-id="<%= tag.id %>">
@@ -34,3 +43,6 @@
     <% end %>
   </ul>
 </div>
+<script type="text/template" id="add_tag_option_template">
+  <option value="{{id}}">{{name}}</option>
+</script>
