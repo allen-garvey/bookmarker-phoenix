@@ -2,25 +2,19 @@
   "repository": {},
   "license": "MIT",
   "scripts": {
-    "deploy": "brunch build --production",
-    "watch": "brunch watch --stdin"
+    "deploy": "gulp build",
+    "watch": "gulp watch"
   },
   "dependencies": {
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html"
   },
   "devDependencies": {
-    "babel-brunch": "~6.0.0",
-    "brunch": "2.7.4",
-    "clean-css-brunch": "~2.0.0",
-    "css-brunch": "~2.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.9.1",
-    "gulp-uglify": "^2.0.0",
-    "javascript-brunch": "~2.0.0",
-    "sass-brunch": "^2.7.0",
-    "uglify-js-brunch": "~2.0.1"
+    "gulp-uglify": "^2.0.0"
   }
 }

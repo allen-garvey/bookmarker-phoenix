@@ -17,6 +17,18 @@ config.js.app_files = ['aquery', 'add_tag_to_bookmark'];
 config.js.app_files = config.js.app_files.map(function(file){return path.join(config.js.SOURCE_DIR, file + '.js');});
 
 
+/*
+* Sass/Styles configuration
+*/
+config.styles = {};
+config.styles.SOURCE_DIR = path.join(__dirname, 'web', 'static', 'css/');
+config.styles.DEST_DIR = path.join(__dirname, 'priv', 'static', 'css/');
+config.styles.sass_options = {
+  errLogToConsole: true,
+  // sourceComments: true, //turns on line number comments 
+  outputStyle: 'compressed' //options: expanded, nested, compact, compressed
+};
+
 
 
 /*
