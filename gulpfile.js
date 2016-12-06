@@ -38,6 +38,14 @@ gulp.task('sass', function() {
         .pipe(gulp.dest(config.styles.DEST_DIR));
 });
 
+/*
+* Static Assets Tasks
+*/
+gulp.task('copyStaticAssets', function() {
+    gulp.src(config.static_assets.SOURCE_DIR + '**/*', {base: config.static_assets.SOURCE_DIR})
+        .pipe(gulp.dest(config.static_assets.DEST_DIR));
+});
+
 
 /*
 * Watch tasks
@@ -51,10 +59,14 @@ gulp.task('watchScripts', function(){
 	gulp.watch(config.js.SOURCE_DIR + '**/*.js', ['minifyScripts']);
 });
 
+gulp.task('watchStaticAssets', function(){
+	gulp.watch(config.static_assets.SOURCE_DIR + '**/*', ['copyStaticAssets']);
+});
+
 
 /*
 * Main gulp tasks
 */
-gulp.task('watch', ['build', 'watchSass', 'watchScripts']);
-gulp.task('build', ['minifyScripts', 'sass']);
+gulp.task('watch', ['build', 'watchSass', 'watchScripts', 'watchStaticAssets']);
+gulp.task('build', ['minifyScripts', 'sass', 'copyStaticAssets']);
 gulp.task('default', ['build']);
