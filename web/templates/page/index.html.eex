@@ -15,6 +15,9 @@
       <%= link "Add folder", to: folder_path(@conn, :new) %>
     </li>
     <li>
+      <%= link "Add tag", to: tag_path(@conn, :new) %>
+    </li>
+    <li>
       <%= link "Bookmarks Tags", to: bookmark_tag_path(@conn, :index) %>
     </li>
   </ul>
