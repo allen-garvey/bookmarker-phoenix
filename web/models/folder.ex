@@ -32,6 +32,18 @@ defmodule Bookmarker.Folder do
   def all_in_order_query() do
     from(f in Bookmarker.Folder, order_by: f.name)
   end 
+  
+  @doc """
+  Returns list of maps (folders) and their
+  count of bookmarks
+  """
+  def with_bookmarks_count_query() do
+    from(f in Bookmarker.Folder, 
+          left_join: b in Bookmarker.Bookmark, on: f.id == b.folder_id, 
+          group_by: [f.id, f.name, f.description], 
+          select: %{name: f.name, id: f.id, description: f.description, bookmark_count: count(b.folder_id)},
+          order_by: f.name) 
+  end 
 
   @doc """
   Returns list of folders with name and id

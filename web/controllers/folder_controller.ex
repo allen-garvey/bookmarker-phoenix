@@ -4,7 +4,8 @@ defmodule Bookmarker.FolderController do
   alias Bookmarker.Folder
 
   def index(conn, _params) do
-    folders = Repo.all(Bookmarker.Folder.all_in_order_query())
+    folders = Folder.with_bookmarks_count_query |> Repo.all
+    
     render(conn, "index.html", folders: folders)
   end
 

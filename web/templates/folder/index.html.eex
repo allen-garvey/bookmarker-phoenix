@@ -3,12 +3,12 @@
 <%= render Bookmarker.SharedView, "index_table_header.html", headings: ["Name", "Description"] %>
     <%= for folder <- @folders do %>
         <tr>
-          <td><%= link Bookmarker.Folder.to_s(folder), to: folder_path(@conn, :show, folder) %></td>
+          <td><%= link Bookmarker.Folder.to_s(folder) <> " (" <> Integer.to_string(folder.bookmark_count) <> ")", to: folder_path(@conn, :show, folder.id) %></td>
           <td><%= folder.description %></td>
 
           <td class="text-right">
-            <%= link "Edit", to: folder_path(@conn, :edit, folder), class: "btn btn-default btn-xs" %>
-            <%= link "Delete", to: folder_path(@conn, :delete, folder), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+            <%= link "Edit", to: folder_path(@conn, :edit, folder.id), class: "btn btn-default btn-xs" %>
+            <%= link "Delete", to: folder_path(@conn, :delete, folder.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
           </td>
         </tr>
     <% end %>
