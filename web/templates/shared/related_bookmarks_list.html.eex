@@ -7,7 +7,7 @@
 		<%= for bookmark <- @bookmarks do %>
 			<li class="list-group-item">
 				<div>
-					<%= link bookmark.title, to: bookmark.url %>
+					<%= link bookmark.title, to: bookmark.url, class: "bookmark-title" %>
 					<%= link "Edit", to: bookmark_path(@conn, :show, bookmark), class: "btn btn-default btn-sm pull-right" %>
 				</div>
 				<div class="bookmark-url"><%= bookmark.url %></div>
