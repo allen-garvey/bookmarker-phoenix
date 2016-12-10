@@ -17,8 +17,8 @@
         <span class="logo"><%= link "Bookmarker", to: "/" %></span>
         <nav role="navigation">
           <ul class="nav">
-            <li><%= link "Folders", to: folder_path(@conn, :index) %></li>
             <li><%= link "Bookmarks", to: bookmark_path(@conn, :index) %></li>
+            <li><%= link "Folders", to: folder_path(@conn, :index) %></li>
             <li><%= link "Tags", to: tag_path(@conn, :index) %></li>
             <li><%= link "Add Bookmark", to: bookmark_path(@conn, :new), class: "btn btn-xs btn-success" %></li>
           </ul>
