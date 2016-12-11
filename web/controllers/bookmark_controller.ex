@@ -14,14 +14,20 @@ defmodule Bookmarker.BookmarkController do
     render(conn, "new.html", changeset: changeset, folders: folders)
   end
 
-  def create(conn, %{"bookmark" => bookmark_params}) do
+  def create(conn, %{"bookmark" => bookmark_params, "form_submit_type" => submit_type}) do
     changeset = Bookmark.changeset(%Bookmark{}, bookmark_params)
 
     case Repo.insert(changeset) do
       {:ok, _bookmark} ->
-        conn
-        |> put_flash(:info, "Bookmark created successfully.")
-        |> redirect(to: bookmark_path(conn, :index))
+        if submit_type == "add_another" do
+          changeset = Bookmark.changeset(%Bookmark{folder_id: _bookmark.folder_id})
+          folders = Bookmarker.Folder.form_list(Repo)
+          render(conn, "new.html", changeset: changeset, folders: folders, flash: Bookmark.to_s(_bookmark) <> " saved.")
+        else
+          conn
+            |> put_flash(:info, "Bookmark created successfully.")
+            |> redirect(to: bookmark_path(conn, :index))
+        end
       {:error, changeset} ->
         folders = Bookmarker.Folder.form_list(Repo)
         render(conn, "new.html", changeset: changeset, folders: folders)

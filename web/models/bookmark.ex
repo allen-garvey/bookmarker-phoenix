@@ -23,6 +23,13 @@ defmodule Bookmarker.Bookmark do
   end
 
   @doc """
+  Returns string representation of model
+  """
+  def to_s(bookmark) do
+    bookmark.title
+  end 
+
+  @doc """
   Returns all bookmarks in Repo in sorted order
   """
   def all_in_order_query() do
