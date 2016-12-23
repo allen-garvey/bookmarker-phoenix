@@ -18,11 +18,11 @@ defmodule Bookmarker.BookmarkController do
     changeset = Bookmark.changeset(%Bookmark{}, bookmark_params)
 
     case Repo.insert(changeset) do
-      {:ok, _bookmark} ->
+      {:ok, bookmark} ->
         if submit_type == "add_another" do
-          changeset = Bookmark.changeset(%Bookmark{folder_id: _bookmark.folder_id})
+          changeset = Bookmark.changeset(%Bookmark{folder_id: bookmark.folder_id})
           folders = Bookmarker.Folder.form_list(Repo)
-          render(conn, "new.html", changeset: changeset, folders: folders, flash: Bookmark.to_s(_bookmark) <> " saved.")
+          render(conn, "new.html", changeset: changeset, folders: folders, flash: Bookmark.to_s(bookmark) <> " saved.")
         else
           conn
             |> put_flash(:info, "Bookmark created successfully.")
