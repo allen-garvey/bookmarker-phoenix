@@ -4,3 +4,5 @@
 						folders: @folders,
                         action: bookmark_path(@conn, :update, @bookmark),
                         form_type: :edit %>
+
+<%= render Bookmarker.SharedView, "hidden_delete_form.html", delete_path: bookmark_path(@conn, :delete, @bookmark), changeset: @changeset %>

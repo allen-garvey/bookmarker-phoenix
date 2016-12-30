@@ -2,7 +2,7 @@
 	<div class="submit_buttons_container">
 		<div>
 			<%= if @form_type == :edit do %>
-			  <button type="button" class="btn btn-danger">Delete</button>
+			  <button type="button" class="btn btn-danger" data-button="delete">Delete</button>
 			<% end %>
 		</div>
 		<div>
