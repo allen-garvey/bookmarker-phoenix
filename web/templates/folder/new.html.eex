@@ -1,6 +1,6 @@
+<%= link "Back", to: folder_path(@conn, :index) %>
+
 <h2>New folder</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: folder_path(@conn, :create) %>
-
-<%= link "Back", to: folder_path(@conn, :index) %>

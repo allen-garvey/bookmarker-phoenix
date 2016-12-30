@@ -1,3 +1,4 @@
+<%= link "Back", to: bookmark_path(@conn, :index) %>
 <h2>New bookmark</h2>
 <%= if assigns[:flash] do %>
   <div class="alert alert-info">
@@ -8,5 +9,3 @@
 						folders: @folders,
                         action: bookmark_path(@conn, :create),
                         form_type: "new" %>
-
-<%= link "Back", to: bookmark_path(@conn, :index) %>

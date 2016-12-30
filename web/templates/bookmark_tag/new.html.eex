@@ -1,6 +1,6 @@
+<%= link "Back", to: bookmark_tag_path(@conn, :index) %>
+
 <h2>New bookmark tag</h2>
 
 <%= render "form.html", changeset: @changeset,
                         action: bookmark_tag_path(@conn, :create), bookmarks: @bookmarks, tags: @tags %>
-
-<%= link "Back", to: bookmark_tag_path(@conn, :index) %>
