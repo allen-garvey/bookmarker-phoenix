@@ -4,7 +4,7 @@ defmodule Bookmarker.BookmarkTagController do
   alias Bookmarker.BookmarkTag
 
   def index(conn, _params) do
-    bookmarks_tags = Repo.all(BookmarkTag) |> Repo.preload([:bookmark, :tag])
+    bookmarks_tags = Repo.all(from BookmarkTag, order_by: [desc: :id]) |> Repo.preload([:bookmark, :tag])
     render(conn, "index.html", bookmarks_tags: bookmarks_tags)
   end
 
