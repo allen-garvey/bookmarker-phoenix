@@ -8,7 +8,6 @@
 
           <td class="text-right">
             <%= link "Edit", to: folder_path(@conn, :edit, folder.id), class: "btn btn-default btn-xs" %>
-            <%= link "Delete", to: folder_path(@conn, :delete, folder.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
           </td>
         </tr>
     <% end %>

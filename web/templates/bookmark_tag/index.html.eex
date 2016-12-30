@@ -9,7 +9,6 @@
           <td class="text-right">
             <%= link "Show", to: bookmark_tag_path(@conn, :show, bookmark_tag), class: "btn btn-default btn-xs" %>
             <%= link "Edit", to: bookmark_tag_path(@conn, :edit, bookmark_tag), class: "btn btn-default btn-xs" %>
-            <%= link "Delete", to: bookmark_tag_path(@conn, :delete, bookmark_tag), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
           </td>
         </tr>
     <% end %>
