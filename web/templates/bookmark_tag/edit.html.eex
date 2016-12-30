@@ -1,4 +1,5 @@
 <%= render Bookmarker.SharedView, "form_header.html", model_name: "bookmark tag", back_path: bookmark_tag_path(@conn, :show, @bookmark_tag) %>
 
 <%= render "form.html", changeset: @changeset,
-                        action: bookmark_tag_path(@conn, :update, @bookmark_tag), bookmarks: @bookmarks, tags: @tags %>
+                        action: bookmark_tag_path(@conn, :update, @bookmark_tag), bookmarks: @bookmarks, tags: @tags,
+                        form_type: :edit %>

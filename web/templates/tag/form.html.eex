@@ -11,7 +11,5 @@
     <%= error_tag f, :name %>
   </div>
 
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
-  </div>
+  <%= render Bookmarker.SharedView, "form_submit_buttons.html", form_type: @form_type, save_another: assigns[:save_another] %>
 <% end %>

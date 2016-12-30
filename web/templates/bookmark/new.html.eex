@@ -9,4 +9,5 @@
 <%= render "form.html", changeset: @changeset,
 						folders: @folders,
                         action: bookmark_path(@conn, :create),
-                        form_type: "new" %>
+                        form_type: :new,
+                        save_another: true %>

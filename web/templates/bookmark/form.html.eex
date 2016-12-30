@@ -28,10 +28,6 @@
     <%= select f, :folder_id, @folders ,class: "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= if @form_type == "new" do %>
-      <%= submit "Save & Add Another", class: "btn btn-default", name: "form_submit_type", value: "add_another" %>
-    <% end %>
-    <%= submit "Save", class: "btn btn-primary", name: "form_submit_type", value: "save" %>
-  </div>
+  <%= render Bookmarker.SharedView, "form_submit_buttons.html", form_type: @form_type, save_another: assigns[:save_another] %>
+  
 <% end %>
