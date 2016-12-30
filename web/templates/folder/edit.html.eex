@@ -1,6 +1,4 @@
-<%= link "Back", to: folder_path(@conn, :show, @folder) %>
-
-<h2>Edit folder</h2>
+<%= render Bookmarker.SharedView, "form_header.html", model_name: "folder", back_path: folder_path(@conn, :show, @folder) %>
 
 <%= render "form.html", changeset: @changeset,
                         action: folder_path(@conn, :update, @folder) %>

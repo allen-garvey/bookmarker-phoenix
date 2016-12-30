@@ -1,6 +1,4 @@
-<%= link "Back", to: tag_path(@conn, :show, @tag) %>
-
-<h2>Edit tag</h2>
+<%= render Bookmarker.SharedView, "form_header.html", model_name: "tag", back_path: tag_path(@conn, :show, @tag) %>
 
 <%= render "form.html", changeset: @changeset,
                         action: tag_path(@conn, :update, @tag) %>

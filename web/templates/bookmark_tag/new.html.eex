@@ -1,6 +1,4 @@
-<%= link "Back", to: bookmark_tag_path(@conn, :index) %>
-
-<h2>New bookmark tag</h2>
+<%= render Bookmarker.SharedView, "form_header.html", model_name: "bookmark tag", back_path: bookmark_tag_path(@conn, :index) %>
 
 <%= render "form.html", changeset: @changeset,
                         action: bookmark_tag_path(@conn, :create), bookmarks: @bookmarks, tags: @tags %>
