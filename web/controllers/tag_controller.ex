@@ -4,7 +4,7 @@ defmodule Bookmarker.TagController do
   alias Bookmarker.Tag
 
   def index(conn, _params) do
-    tags = Repo.all(Tag)
+    tags = Repo.all(Tag.all_in_order_query())
     render(conn, "index.html", tags: tags)
   end
 
