@@ -12,6 +12,10 @@
 			if(!deleteForm){
 				return;
 			}
+			var deleteConfirmed = window.confirm("Are you sure you want to delete this item?");
+			if(!deleteConfirmed){
+				return;
+			}
 			deleteForm.submit();
 		}; 
 	})();
