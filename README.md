@@ -8,7 +8,7 @@ To start your Phoenix app:
   * Install `gulp` if you have not already done so with `sudo npm install gulp -g`
   * Start Phoenix endpoint with `mix phoenix.server`
 
-Now you can visit [`localhost:3000`](http://localhost:3000) from your browser.
+Now you can visit [`localhost:5051`](http://localhost:5051) from your browser.
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
