@@ -1,5 +1,7 @@
 # OS specific files to ignore
 .DS_Store
+.directory
+.fuse*
 
 # Sublime artifacts
 *.sublime-project
