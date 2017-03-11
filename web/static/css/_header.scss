@@ -12,8 +12,19 @@
 }
 .nav{
 	display: flex;
-	margin-top: 0;
+	margin: 0;
 	align-items: baseline;
+	list-style-type: none;
+	padding-left: 0;
+
+	& > li > a{
+		display: block;
+		padding: 10px 15px;
+		&:not(.btn):hover{
+			text-decoration: none;
+			background-color: #eee;
+		}
+	}
 }
 .logo {
 	font-weight: bold;
