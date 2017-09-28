@@ -27,6 +27,7 @@ defmodule Bookmarker.Router do
   scope "/api", Bookmarker do
     pipe_through :api
 
+    get "folders", ApiFolderController, :index
     get "/folders/:folder_name/bookmarks", ApiFolderController, :bookmarks_for_folder
     get "/tags/bookmark/:bookmark_id/unused", ApiTagController, :unused_tags_for_bookmark
     post "/bookmarks_tags/", ApiBookmarkTagController, :create_bookmark_tag
