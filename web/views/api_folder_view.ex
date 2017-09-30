@@ -11,6 +11,16 @@ defmodule Bookmarker.ApiFolderView do
     }
   end
 
+  @doc """
+  Returns JSON array of bookmarks in 
+  http://jsonapi.org/ json api v1.0 format specification 
+  """
+  def render("bookmarks_for_folder.json", %{bookmarks: bookmarks}) do
+    %{
+      data: Enum.map(bookmarks, &bookmark_json/1)
+    }
+  end
+
   def folder_json(folder) do
     %{
       id: Integer.to_string(folder.id),
@@ -23,16 +33,6 @@ defmodule Bookmarker.ApiFolderView do
     }
   end
 
-  @doc """
-  Returns JSON array of bookmarks in 
-  http://jsonapi.org/ json api v1.0 format specification 
-  """
-  def render("bookmarks_for_folder.json", %{bookmarks: bookmarks}) do
-    %{
-      data: Enum.map(bookmarks, &bookmark_json/1)
-    }
-  end
-
   def bookmark_json(bookmark) do
     %{
       id: Integer.to_string(bookmark.id),
@@ -40,7 +40,9 @@ defmodule Bookmarker.ApiFolderView do
       attributes: %{
         title: bookmark.title,
         url: bookmark.url,
-        description: bookmark.description
+        rss_url: bookmark.rss_url,
+        description: bookmark.description,
+        preview_image_selector: bookmark.preview_image_selector
       }
     }
   end

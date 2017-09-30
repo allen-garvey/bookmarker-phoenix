@@ -5,7 +5,7 @@
 		<ul class="list-group folder-bookmark-list">
 		<li class="list-group-item list-group-item-info"><h4>Bookmarks</h4></li>
 		<%= for bookmark <- @bookmarks do %>
-			<li class="list-group-item">
+			<li class="list-group-item <%= if !is_nil(bookmark.preview_image_selector) do "list-group-item-success preview-enabled" end %>">
 				<div>
 					<%= link bookmark.title, to: bookmark.url, class: "bookmark-title" %>
 					<%= link "Edit", to: bookmark_path(@conn, :show, bookmark), class: "btn btn-default btn-sm pull-right" %>

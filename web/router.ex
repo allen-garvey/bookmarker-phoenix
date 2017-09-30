@@ -23,11 +23,18 @@ defmodule Bookmarker.Router do
     resources "/bookmarks_tags", BookmarkTagController
   end
 
+  #preview bookmarks
+  scope "/preview", Bookmarker do
+    pipe_through :browser # Use the default browser stack
+
+    get "/folder/:folder_name", FolderPreviewController, :show
+  end
+
   #JSON API
   scope "/api", Bookmarker do
     pipe_through :api
 
-    get "folders", ApiFolderController, :index
+    get "/folders", ApiFolderController, :index
     get "/folders/:folder_name/bookmarks", ApiFolderController, :bookmarks_for_folder
     get "/tags/bookmark/:bookmark_id/unused", ApiTagController, :unused_tags_for_bookmark
     post "/bookmarks_tags/", ApiBookmarkTagController, :create_bookmark_tag
