@@ -7,12 +7,24 @@
   </li>
   <li>
     <strong>Url:</strong>
-    <a href="<%= @bookmark.url %>"><%= @bookmark.url %></a>
+    <%= link @bookmark.url, to: @bookmark.url %>
   </li>
+  <%= if @bookmark.rss_url != nil do %>
+    <li>
+      <strong>RSS Url:</strong>
+      <%= link @bookmark.rss_url, to: @bookmark.rss_url %>
+    </li>
+  <% end %>
   <%= if @bookmark.description != nil do %>
     <li>
       <strong>Description:</strong>
       <%= @bookmark.description %>
+    </li>
+  <% end %>
+  <%= if @bookmark.preview_image_selector != nil do %>
+    <li>
+      <strong>Preview image selector:</strong>
+      <%= @bookmark.preview_image_selector %>
     </li>
   <% end %>
 

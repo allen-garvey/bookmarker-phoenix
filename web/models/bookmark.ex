@@ -5,6 +5,8 @@ defmodule Bookmarker.Bookmark do
     field :title, :string
     field :url, :string
     field :description, :string
+    field :rss_url, :string
+    field :preview_image_selector, :string
     belongs_to :folder, Bookmarker.Folder
     many_to_many :tags, Bookmarker.Tag, join_through: "bookmarks_tags", on_delete: :delete_all
 
@@ -16,7 +18,7 @@ defmodule Bookmarker.Bookmark do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:title, :url, :description, :folder_id])
+    |> cast(params, [:title, :url, :description, :folder_id, :rss_url, :preview_image_selector])
     |> validate_required([:title, :url, :folder_id])
     |> foreign_key_constraint(:folder_id)
     |> assoc_constraint(:folder) #validate folder exists
