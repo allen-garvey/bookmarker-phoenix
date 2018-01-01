@@ -12,6 +12,4 @@ Now you can visit [`localhost:5051`](http://localhost:5051) from your browser.
 
 ## Run as daemon
 
-  * Install forever.js if you haven't already with `npm install forever -g` (might require `sudo`)
-  * Start the application with `forever --killSignal=SIGTERM start bookmarker.js` or with `./start.sh`
-  * Stop the application with `forever stop bookmarker.js`
+  * Run `start.sh` and `stop.sh`
