@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-mix phoenix.server > /dev/null 2>&1 &
+mix phx.server > /dev/null 2>&1 &
