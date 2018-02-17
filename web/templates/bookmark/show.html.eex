@@ -27,8 +27,13 @@
       <%= @bookmark.preview_image_selector %>
     </li>
   <% end %>
-
 </ul>
+
+<div>
+  <%= if @bookmark.thumbnail_url != nil do
+    link img_tag(@bookmark.thumbnail_url), to: @bookmark.thumbnail_url 
+  end %>
+</div>
 
 <div data-bookmark-id="<%= @bookmark.id %>">
   <ul class="list-group tag-list">

@@ -16,7 +16,7 @@
 	margin-bottom: 0.5em;
 }
 
-/*Folder Show page*/
+/*bookmark lists for folder and tag show pages*/
 
 .bookmark-url, 
 .folder-bookmark-list .bookmark-description{
@@ -27,6 +27,20 @@
 }
 .bookmark-title{
 	font-size: 16px;
+}
+
+.folder-bookmark-list{
+	.bookmark-item{
+		display: flex;
+		justify-content: space-between;
+	}
+	.bookmark-thumbnail-container{
+		width: 300px;
+
+		&:empty{
+			display: none;
+		}
+	}
 }
 
 

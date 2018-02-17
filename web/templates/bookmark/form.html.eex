@@ -36,6 +36,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :thumbnail_url, class: "control-label" %>
+    <%= url_input f, :thumbnail_url, class: "form-control" %>
+    <%= error_tag f, :thumbnail_url %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :folder_id, "Folder", class: "control-label" %>
     <%= select f, :folder_id, @folders ,class: "form-control" %>
   </div>
