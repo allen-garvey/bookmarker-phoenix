@@ -15,12 +15,17 @@ defmodule Bookmarker.FolderPreviewController do
                         |> Enum.filter(&should_bookmark_be_previewed/1)
                         |> pmap(&img_for_bookmark/1) 
                         |> Enum.zip(filtered_bookmarks)
+                        |> Enum.filter(&does_bookmark_have_img/1)
 
     render(conn, "show.html", folder: folder, preview_results: preview_results)
   end
 
   def should_bookmark_be_previewed(bookmark) do
     !is_nil(bookmark.preview_image_selector)
+  end
+
+  def does_bookmark_have_img({img, _bookmark}) do
+    !is_nil(img)
   end
 
   def img_for_bookmark(bookmark) do
@@ -38,8 +43,17 @@ defmodule Bookmarker.FolderPreviewController do
   end
 
   def html_body(url) do
-    resp = HTTPoison.get! url
-    resp.body
+    case HTTPoison.get(url) do
+        {:ok, resp} ->
+            resp.body
+        {:error, _error} ->
+            nil
+    end
+  end
+
+
+  def extract_img_html(nil, _selector, _base_url) do
+    nil
   end
 
   def extract_img_html(body, selector, base_url) do
