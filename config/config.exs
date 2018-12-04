@@ -13,9 +13,7 @@ config :bookmarker,
 config :bookmarker, Bookmarker.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "KhbxZihdofwazJHAnxhJMDTpMtQ7DWHgSGzDyT4KYqc6OYOhzvLbPmD0+/znczhp",
-  render_errors: [view: Bookmarker.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Bookmarker.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  render_errors: [view: Bookmarker.ErrorView, accepts: ~w(html json)]
 
 # Configures Elixir's Logger
 config :logger, :console,

@@ -18,7 +18,7 @@ defmodule Bookmarker.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Bookmarker, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex]]
   end
 
@@ -32,7 +32,6 @@ defmodule Bookmarker.Mixfile do
   defp deps do
     [
       {:phoenix, "~> 1.3"},
-      {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.3"},
       {:postgrex, "~> 0.13"},
       {:phoenix_html, "~> 2.10"},
