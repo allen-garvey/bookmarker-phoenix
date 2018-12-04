@@ -27,7 +27,6 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :bookmarker, Bookmarker.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
   database: "bookmarker_dev",
