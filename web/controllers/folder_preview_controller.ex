@@ -9,18 +9,15 @@ defmodule Bookmarker.FolderPreviewController do
   """
   def show(conn, %{"folder_name" => folder_name}) do
     HTTPoison.start
-    folder = Repo.get_by!(Folder, name: folder_name) |> Repo.preload([:bookmarks])
-    filtered_bookmarks = folder.bookmarks |> Enum.filter(&should_bookmark_be_previewed/1) 
-    preview_results = filtered_bookmarks
+    bookmarks_query = from bookmark in Bookmarker.Bookmark, where: not is_nil(bookmark.preview_image_selector), order_by: [desc: :id]
+    folder = Repo.one! from folder in Folder, where: folder.name == ^folder_name, preload: [bookmarks: ^bookmarks_query]
+    
+    preview_results = folder.bookmarks
                         |> pmap(&img_for_bookmark/1) 
-                        |> Enum.zip(filtered_bookmarks)
+                        |> Enum.zip(folder.bookmarks)
                         |> Enum.filter(&does_bookmark_have_img/1)
 
     render(conn, "show.html", folder: folder, preview_results: preview_results)
-  end
-
-  def should_bookmark_be_previewed(bookmark) do
-    !is_nil(bookmark.preview_image_selector)
   end
 
   def does_bookmark_have_img({img, _bookmark}) do
