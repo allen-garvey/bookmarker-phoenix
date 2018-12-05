@@ -28,7 +28,7 @@ defmodule Bookmarker.FolderController do
   end
 
   def show(conn, %{"id" => id}) do
-    folder = Repo.get!(Folder, id) |> Repo.preload([:bookmarks])
+    folder = Repo.get!(Folder, id) |> Repo.preload([bookmarks: from(bookmark in Bookmarker.Bookmark, order_by: [desc: :id])])
     render(conn, "show.html", folder: folder)
   end
 
