@@ -13,15 +13,21 @@ defmodule Bookmarker.FolderPreviewController do
     folder = Repo.one! from folder in Folder, where: folder.name == ^folder_name, preload: [bookmarks: ^bookmarks_query]
     
     preview_results = folder.bookmarks
-                        |> pmap(&img_for_bookmark/1) 
+                        |> Task.async_stream(&img_for_bookmark/1, max_concurrency: System.schedulers_online * 4)
+                        |> Enum.to_list()
                         |> Enum.zip(folder.bookmarks)
                         |> Enum.filter(&does_bookmark_have_img/1)
+                        |> Enum.map(&async_task_result_to_img/1)
 
     render(conn, "show.html", folder: folder, preview_results: preview_results)
   end
 
-  def does_bookmark_have_img({img, _bookmark}) do
+  def does_bookmark_have_img({{:ok, img}, _bookmark}) do
     !is_nil(img)
+  end
+
+  def does_bookmark_have_img({{_status, _img}, _bookmark}) do
+    false
   end
 
   def img_for_bookmark(bookmark) do
@@ -86,11 +92,9 @@ defmodule Bookmarker.FolderPreviewController do
   def get_first_safe(x) do
     x
   end
-  
-  def pmap(collection, func) do
-    collection
-    |> Enum.map(&(Task.async(fn -> func.(&1) end)))
-    |> Enum.map(&Task.await/1)
+
+  def async_task_result_to_img({{:ok, img}, bookmark}) do
+    {img, bookmark}
   end
 
 end
