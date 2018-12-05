@@ -12,7 +12,6 @@ defmodule Bookmarker.FolderPreviewController do
     folder = Repo.get_by!(Folder, name: folder_name) |> Repo.preload([:bookmarks])
     filtered_bookmarks = folder.bookmarks |> Enum.filter(&should_bookmark_be_previewed/1) 
     preview_results = filtered_bookmarks
-                        |> Enum.filter(&should_bookmark_be_previewed/1)
                         |> pmap(&img_for_bookmark/1) 
                         |> Enum.zip(filtered_bookmarks)
                         |> Enum.filter(&does_bookmark_have_img/1)
