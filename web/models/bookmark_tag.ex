@@ -15,10 +15,8 @@ defmodule Bookmarker.BookmarkTag do
     struct
     |> cast(params, [:bookmark_id, :tag_id])
     |> validate_required([:bookmark_id, :tag_id])
-    |> foreign_key_constraint(:bookmark_id)
-    |> foreign_key_constraint(:tag_id)
-    |> assoc_constraint(:bookmark) #validate existence
-    |> assoc_constraint(:tag) #validate existence
+    |> assoc_constraint(:bookmark)
+    |> assoc_constraint(:tag)
     |> unique_constraint(:bookmark_tag_composite, name: :bookmark_tag_composite)
   end
 end
