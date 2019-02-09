@@ -43,7 +43,7 @@ defmodule Bookmarker.Mixfile do
       {:plug_cowboy, "~> 2.0"},
       {:poison, "~> 3.0"},
       {:httpoison, "~> 0.13"}, #for folder previews
-      {:floki, "~> 0.19"},   #for folder previews
+      {:floki, "~> 0.20.4"},   #for folder previews
    ]
   end
 
