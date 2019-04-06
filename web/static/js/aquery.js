@@ -392,3 +392,5 @@ aQuery.ajax = function(settings){
     xmlhttp.open(settings.method, url, true);
     xmlhttp.send(data);
 };
+
+export default aQuery;

@@ -1,7 +1,6 @@
+import $ from './aquery.js';
 
-
-var AddTagToBookmark = {};
-AddTagToBookmark.init = function($){
+export function initializeAddTagToBookmark(){
 	//initialize variables
 	var bookmarkId = $('[data-bookmark-id]').data('bookmark-id');
 	var tagOptionTemplate = $.template($('#add_tag_option_template').html());
@@ -85,5 +84,3 @@ AddTagToBookmark.init = function($){
 		
 	});
 };
-
-AddTagToBookmark.init(aQuery);
