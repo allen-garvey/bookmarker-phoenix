@@ -61,20 +61,15 @@ export function initializeAddTagToBookmark(){
 
 	//remove tag
 	$('.tag-list').on('click', '[data-role="remove-tag-button"]', function(event) {
-		var removeButton = $(this);
-		var tagId = removeButton.closest('[data-tag-id]').data('tag-id');
-		$.ajax({
-			url: '/api/bookmarks_tags/',
-			method: 'DELETE',
-			dataType: 'json',
-			data: {bookmark_id: bookmarkId, tag_id: tagId},
-			success: function(response){
-				if(response.error){
-					return;
-				}
-				removeButton.closest('.list-group-item').remove();
+		const removeButton = $(this);
+		const tagId = removeButton.closest('[data-tag-id]').data('tag-id');
+		const data = {bookmark_id: bookmarkId, tag_id: tagId};
+
+		sendJson('/api/bookmarks_tags/', 'DELETE', data).then((json)=>{
+			if(json.error){
+				return;
 			}
-		});
-		
+			removeButton.closest('.list-group-item').remove();
+		});		
 	});
 };
