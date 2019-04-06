@@ -12,7 +12,7 @@ export function initializeAddTagToBookmark(){
 	const addTagButton = $('[data-role="add-tag-button"]');
 
 	//populate and show tag select form
-	$('[data-role="add-tag-button"]').on('click', (event)=>{
+	$('[data-role="add-tag-button"]').on('click', function(event){
 		$(this).hide();
 
 		getJson(`/api/tags/bookmark/${bookmarkId}/unused`).then((data)=>{
@@ -60,7 +60,7 @@ export function initializeAddTagToBookmark(){
 	});
 
 	//remove tag
-	$('.tag-list').on('click', '[data-role="remove-tag-button"]', (event)=>{
+	$('.tag-list').on('click', '[data-role="remove-tag-button"]', function(event){
 		const removeButton = $(this);
 		const tagId = removeButton.closest('[data-tag-id]').data('tag-id');
 		const data = {bookmark_id: bookmarkId, tag_id: tagId};
