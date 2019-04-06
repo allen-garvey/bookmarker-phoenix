@@ -104,7 +104,7 @@ class aQueryObject{
 	//content should already be element, such as that returned by aQuery.parseHTML() or html string
 	before(content){
 		if(typeof content == 'string'){
-			content = aQuery.parseHTML(content);
+			content = parseHTML(content);
 		}
 		this.each(function(i, element){
 			element.parentNode.insertBefore(content, element);
@@ -113,7 +113,7 @@ class aQueryObject{
 
 	after(content){
 		if(typeof content == 'string'){
-			content = aQuery.parseHTML(content);
+			content = parseHTML(content);
 		}
 		this.each(function(i, element){
 			element.parentNode.insertBefore(content, element.nextSibling);
@@ -122,7 +122,7 @@ class aQueryObject{
 
 	append(content){
 		if(typeof content == 'string'){
-			content = aQuery.parseHTML(content);
+			content = parseHTML(content);
 		}
 		this.each(function(i, element){
 			element.appendChild(content);
@@ -221,8 +221,8 @@ function aQuery(selector){
 
 //based on http://stackoverflow.com/questions/494143/creating-a-new-dom-element-from-an-html-string-using-built-in-dom-methods-or-pro
 //template tag not supported below Edge 13 so no IE
-aQuery.parseHTML = function(html) {
-	var template = document.createElement('template');
+function parseHTML(html) {
+	const template = document.createElement('template');
     template.innerHTML = html;
     return template.content.firstElementChild;
 };
