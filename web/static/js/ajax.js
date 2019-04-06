@@ -6,3 +6,15 @@ export function getJson(url){
         return json.data;
     });
 }
+
+export function sendJson(url, method='POST', data={}){
+    return fetch(url, 
+        {
+            method,
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+        },
+
+    }).then(data=>data.json());
+}
