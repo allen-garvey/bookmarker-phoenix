@@ -137,9 +137,6 @@ aQueryObject.prototype.append = function(content){
 
 //http://stackoverflow.com/questions/6104125/how-can-i-remove-an-element-in-javascript-without-jquery
 aQueryObject.prototype.remove = function(){
-	if(typeof content == 'string'){
-		content = aQuery.parseHTML(content);
-	}
 	this.each(function(i, element){
 		element.parentNode.removeChild(element);
 	});
