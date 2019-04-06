@@ -2,9 +2,8 @@
  * aQuery - lightweight version of jQuery 
  */
 
-
-function aQuery(selector){
-	function aQueryObject(selector){
+class aQueryObject{
+	constructor(selector){
 		if(typeof selector === 'string'){
 			this.elementList = document.querySelectorAll(selector);
 		}
@@ -17,17 +16,18 @@ function aQuery(selector){
 		}
 		this.length = this.elementList.length >= 0 ? this.elementList.length : 1;
 	}
+
 	/*
 	* General utility methods
 	*/
 	//callback - index, element
-	aQueryObject.prototype.each = function(func){
+	each(func){
 		for (var i = 0; i < this.length; i++) {
 			func.call(this.elementList[i], i, this.elementList[i]);
 		}
 	}
 
-	aQueryObject.prototype.first = function(){
+	first(){
 		//if empty, just return same empty object
 		//since all empty objects are functionally identical
 		if(this.length === 0){
@@ -35,188 +35,186 @@ function aQuery(selector){
 		}
 		return new aQueryObject(this.elementList[0]);
 	}
-/*
-* Text, inner html and data methods
-*/
 
-//if new value is set, sets first element attribute to that value
-//otherwise returns the value of that attribute for the first element
-//in the collection
-aQueryObject.prototype.attr = function(attributeName, newValue){
-	var setVal = typeof newValue === 'string' ? true : false;
+	/*
+	* Text, inner html and data methods
+	*/
+	//if new value is set, sets first element attribute to that value
+	//otherwise returns the value of that attribute for the first element
+	//in the collection
+	attr(attributeName, newValue){
+		var setVal = typeof newValue === 'string' ? true : false;
 
-	var ret = setVal ? this : '';
+		var ret = setVal ? this : '';
 
-	if(this.length > 0){
-		if(setVal && typeof this.elementList[0][attributeName] !== undefined){
-			this.elementList[0][attributeName] = newValue;
+		if(this.length > 0){
+			if(setVal && typeof this.elementList[0][attributeName] !== undefined){
+				this.elementList[0][attributeName] = newValue;
+			}
+			else{
+				ret = this.elementList[0][attributeName];
+			}
+		}
+		return ret;
+	}
+
+
+	//convenience function for aQueryObject.attr('value', newValue)
+	val(newValue){
+		return this.attr('value', newValue);
+	}
+
+	//convenience function for aQueryObject.attr('innerHTML', newValue)
+	html(newValue){
+		return this.attr('innerHTML', newValue);
+	}
+
+	//convenience function for aQueryObject.attr('innerHTML', newValue)
+	text(newValue){
+		return this.attr('textContent', newValue);
+	}
+
+	data(key){
+		if(this.length < 1){
+			return '';
+		}
+		return this.elementList[0].getAttribute('data-' + key);
+	}
+
+	/*
+	* DOM Selection methods
+	*/
+	closest(selector){
+		//if empty, just return same empty object
+		//since empty objects have no parents
+		if(this.length === 0){
+			return this;
+		}
+		const element = this.first().elementList[0];
+		let closestElement = element.closest(selector);
+		//null means not found
+		closestElement = closestElement || [];
+		return new aQueryObject(closestElement);
+	};
+
+	/*
+	* DOM Manipulation methods
+	*/
+	//based on http://stackoverflow.com/questions/4793604/how-to-do-insert-after-in-javascript-without-using-a-library
+	//content should already be element, such as that returned by aQuery.parseHTML() or html string
+	before(content){
+		if(typeof content == 'string'){
+			content = aQuery.parseHTML(content);
+		}
+		this.each(function(i, element){
+			element.parentNode.insertBefore(content, element);
+		});
+	};
+
+	after(content){
+		if(typeof content == 'string'){
+			content = aQuery.parseHTML(content);
+		}
+		this.each(function(i, element){
+			element.parentNode.insertBefore(content, element.nextSibling);
+		});
+	};
+
+	append(content){
+		if(typeof content == 'string'){
+			content = aQuery.parseHTML(content);
+		}
+		this.each(function(i, element){
+			element.appendChild(content);
+		});
+	};
+
+	//http://stackoverflow.com/questions/6104125/how-can-i-remove-an-element-in-javascript-without-jquery
+	remove(){
+		this.each(function(i, element){
+			element.parentNode.removeChild(element);
+		});
+	};
+
+	/*
+	* CSS Class methods
+	*/
+	addClass(className){
+		this.each(function(i, element){
+			element.classList.add(className);
+		});
+		return this;
+	};
+	removeClass(className){
+		this.each(function(i, element){
+			element.classList.remove(className);
+		});
+		return this;
+	};
+	toggleClass(className){
+		this.each(function(i, element){
+			element.classList.toggle(className);
+		});
+		return this;
+	};
+
+	/*
+	* Basic transitions
+	* note that show and hide will overwrite any inline display properties
+	* and that show will change display to block
+	*/
+	hide(){
+		this.each(function(i, element){
+			element.style.display = 'none';
+		});
+		return this;
+	};
+	show(){
+		this.each(function(i, element){
+			element.style.display = 'block';
+		});
+		return this;
+	};
+
+	/*
+	* Event methods
+	*/
+	on(eventName, selector, callback){
+		//check if using delegation
+		if(selector instanceof Function){
+			//not using delegation
+			var callbackFunc = function(e){ selector.call(e.target, e); };
 		}
 		else{
-			ret = this.elementList[0][attributeName];
+			//using delegation
+			//based on: https://davidwalsh.name/event-delegate
+			var callbackFunc = function(e){
+				if(e.target && e.target.matches(selector)){
+					callback.call(e.target, e);
+				}
+			};
 		}
-	}
-	return ret;
+		//add event listers
+		this.each(function(i, element){
+			//element.addEventListener(eventName, function(e){callbackFunc.call(element, e);}, false);
+			element.addEventListener(eventName, callbackFunc, false);
+		});
+
+	};
+	//calls onclick callback(s)
+	click(){
+		this.each(function(i, element){
+			element.click();
+		});
+	};
 }
 
-
-//convenience function for aQueryObject.attr('value', newValue)
-aQueryObject.prototype.val = function(newValue){
-	return this.attr('value', newValue);
-}
-
-//convenience function for aQueryObject.attr('innerHTML', newValue)
-aQueryObject.prototype.html = function(newValue){
-	return this.attr('innerHTML', newValue);
-}
-
-//convenience function for aQueryObject.attr('innerHTML', newValue)
-aQueryObject.prototype.text = function(newValue){
-	return this.attr('textContent', newValue);
-}
-
-aQueryObject.prototype.data = function(key){
-	if(this.length < 1){
-		return '';
-	}
-	return this.elementList[0].getAttribute('data-' + key);
-}
-
-
-
-/*
-* DOM Selection methods
-*/
-
-aQueryObject.prototype.closest = function(selector){
-	//if empty, just return same empty object
-	//since empty objects have no parents
-	if(this.length === 0){
-		return this;
-	}
-	const element = this.first().elementList[0];
-	let closestElement = element.closest(selector);
-	//null means not found
-	closestElement = closestElement || [];
-	return new aQueryObject(closestElement);
-};
-/*
-* DOM Manipulation methods
-*/
-
-//based on http://stackoverflow.com/questions/4793604/how-to-do-insert-after-in-javascript-without-using-a-library
-//content should already be element, such as that returned by aQuery.parseHTML() or html string
-aQueryObject.prototype.before = function(content){
-	if(typeof content == 'string'){
-		content = aQuery.parseHTML(content);
-	}
-	this.each(function(i, element){
-		element.parentNode.insertBefore(content, element);
-	});
-};
-
-aQueryObject.prototype.after = function(content){
-	if(typeof content == 'string'){
-		content = aQuery.parseHTML(content);
-	}
-	this.each(function(i, element){
-		element.parentNode.insertBefore(content, element.nextSibling);
-	});
-};
-
-aQueryObject.prototype.append = function(content){
-	if(typeof content == 'string'){
-		content = aQuery.parseHTML(content);
-	}
-	this.each(function(i, element){
-		element.appendChild(content);
-	});
-};
-
-//http://stackoverflow.com/questions/6104125/how-can-i-remove-an-element-in-javascript-without-jquery
-aQueryObject.prototype.remove = function(){
-	this.each(function(i, element){
-		element.parentNode.removeChild(element);
-	});
-};
-
-/*
-* CSS Class methods
-*/
-aQueryObject.prototype.addClass = function(className){
-	this.each(function(i, element){
-		element.classList.add(className);
-	});
-	return this;
-};
-aQueryObject.prototype.removeClass = function(className){
-	this.each(function(i, element){
-		element.classList.remove(className);
-	});
-	return this;
-};
-aQueryObject.prototype.toggleClass = function(className){
-	this.each(function(i, element){
-		element.classList.toggle(className);
-	});
-	return this;
-};
-/*
-* Basic transitions
-* note that show and hide will overwrite any inline display properties
-* and that show will change display to block
-*/
-
-aQueryObject.prototype.hide = function(){
-	this.each(function(i, element){
-		element.style.display = 'none';
-	});
-	return this;
-};
-aQueryObject.prototype.show = function(){
-	this.each(function(i, element){
-		element.style.display = 'block';
-	});
-	return this;
-};
-/*
-* Event methods
-*/
-
-aQueryObject.prototype.on = function(eventName, selector, callback){
-	//check if using delegation
-	if(selector instanceof Function){
-		//not using delegation
-		var callbackFunc = function(e){ selector.call(e.target, e); };
-	}
-	else{
-		//using delegation
-		//based on: https://davidwalsh.name/event-delegate
-		var callbackFunc = function(e){
-			if(e.target && e.target.matches(selector)){
-				callback.call(e.target, e);
-			}
-		};
-	}
-	//add event listers
-	this.each(function(i, element){
-		//element.addEventListener(eventName, function(e){callbackFunc.call(element, e);}, false);
-		element.addEventListener(eventName, callbackFunc, false);
-	});
-
-};
-//calls onclick callback(s)
-aQueryObject.prototype.click = function(){
-	this.each(function(i, element){
-		element.click();
-	});
-};
-	/*
-	* Input validation
-	*/
+function aQuery(selector){
 	if(typeof selector === 'string' || typeof selector === 'object'){
 		return (new aQueryObject(selector));
 	}
 }
+
 /*
 * Static methods added after aquery is initialized
 */
