@@ -36,3 +36,6 @@ npm-debug.log.*
 /config/prod.secret.exs
 
 *.log
+
+#dialyzer
+.elixir_ls/*
