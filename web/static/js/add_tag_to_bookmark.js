@@ -1,5 +1,5 @@
 import $ from './aquery.js';
-import { getJson } from './ajax.js';
+import { getJson, sendJson } from './ajax.js';
 
 export function initializeAddTagToBookmark(){
 	//initialize variables
@@ -43,21 +43,20 @@ export function initializeAddTagToBookmark(){
 
 	//save tag
 	$('[data-role="save-tag-button"]').on('click', function(event){
-		var tagId = $('.add-tag-container select').val();
-		$.ajax({
-			url: '/api/bookmarks_tags/',
-			method: 'POST',
-			dataType: 'json',
-			data: {bookmark_id: bookmarkId, tag_id: tagId},
-			success: function(response){
-				resetAddTagForm();
-				if(response.error){
-					return;
-				}
-				tagList.append(tagListItemTemplate.render({tagId: response.data.attributes.tag.id, tagName: response.data.attributes.tag.attributes.name}));
+		const tagId = $('.add-tag-container select').val();
+		const data = {bookmark_id: bookmarkId, tag_id: tagId};
+
+		sendJson('/api/bookmarks_tags/', 'POST', data).then((json)=>{
+			resetAddTagForm();
+			if(json.error){
+				return;
 			}
+			const tag = json.data.attributes.tag;
+			tagList.append(tagListItemTemplate.render({
+				tagId: tag.id, 
+				tagName: tag.attributes.name
+			}));
 		});
-		
 	});
 
 	//remove tag
