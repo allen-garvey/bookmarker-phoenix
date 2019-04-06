@@ -3,16 +3,16 @@ import { getJson, sendJson } from './ajax.js';
 
 export function initializeAddTagToBookmark(){
 	//initialize variables
-	var bookmarkId = $('[data-bookmark-id]').data('bookmark-id');
-	var tagOptionTemplate = $.template($('#add_tag_option_template').html());
-	var tagSelectTag = $('.add-tag-container select');
-	var tagListItemTemplate = $.template($('#add_tag_tag_item_template').html());
-	var tagList = $('.tag-list');
-	var addTagContainer = $('.add-tag-container');
-	var addTagButton = $('[data-role="add-tag-button"]');
+	const bookmarkId = $('[data-bookmark-id]').data('bookmark-id');
+	const tagOptionTemplate = $.template($('#add_tag_option_template').html());
+	const tagSelectTag = $('.add-tag-container select');
+	const tagListItemTemplate = $.template($('#add_tag_tag_item_template').html());
+	const tagList = $('.tag-list');
+	const addTagContainer = $('.add-tag-container');
+	const addTagButton = $('[data-role="add-tag-button"]');
 
 	//populate and show tag select form
-	$('[data-role="add-tag-button"]').on('click', function(e){
+	$('[data-role="add-tag-button"]').on('click', (event)=>{
 		$(this).hide();
 
 		getJson(`/api/tags/bookmark/${bookmarkId}/unused`).then((data)=>{
@@ -37,12 +37,12 @@ export function initializeAddTagToBookmark(){
 	}
 
 	//cancel adding tag
-	$('[data-role="cancel-tag-button"]').on('click', function(event) {
+	$('[data-role="cancel-tag-button"]').on('click', (event)=>{
 		resetAddTagForm();
 	});
 
 	//save tag
-	$('[data-role="save-tag-button"]').on('click', function(event){
+	$('[data-role="save-tag-button"]').on('click', (event)=>{
 		const tagId = $('.add-tag-container select').val();
 		const data = {bookmark_id: bookmarkId, tag_id: tagId};
 
@@ -60,7 +60,7 @@ export function initializeAddTagToBookmark(){
 	});
 
 	//remove tag
-	$('.tag-list').on('click', '[data-role="remove-tag-button"]', function(event) {
+	$('.tag-list').on('click', '[data-role="remove-tag-button"]', (event)=>{
 		const removeButton = $(this);
 		const tagId = removeButton.closest('[data-tag-id]').data('tag-id');
 		const data = {bookmark_id: bookmarkId, tag_id: tagId};
