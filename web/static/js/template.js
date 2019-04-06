@@ -41,7 +41,7 @@ class Templater{
 * similar to underscore templates but using handlebar syntax
 * only {{variable}} for HTML escaped value and {{{variable}}} for unescaped 
 * is supported and unset variables are not replaced with anything
-* Usage: aQuery.template('my template string {{variableName}}') returns templater object
+* Usage: template('my template string {{variableName}}') returns templater object
 * templater.render({variableName: 'variable value'}) returns string of compiled template
 * with set variables replaced by HTML escaped values
 */
