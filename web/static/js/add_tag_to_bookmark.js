@@ -1,12 +1,13 @@
 import $ from './aquery.js';
 import { getJson, sendJson } from './ajax.js';
+import { template } from './template.js';
 
 export function initializeAddTagToBookmark(){
 	//initialize variables
 	const bookmarkId = $('[data-bookmark-id]').data('bookmark-id');
-	const tagOptionTemplate = $.template($('#add_tag_option_template').html());
+	const tagOptionTemplate = template($('#add_tag_option_template').html());
 	const tagSelectTag = $('.add-tag-container select');
-	const tagListItemTemplate = $.template($('#add_tag_tag_item_template').html());
+	const tagListItemTemplate = template($('#add_tag_tag_item_template').html());
 	const tagList = $('.tag-list');
 	const addTagContainer = $('.add-tag-container');
 	const addTagButton = $('[data-role="add-tag-button"]');
