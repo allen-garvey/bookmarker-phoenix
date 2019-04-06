@@ -1,4 +1,5 @@
 import $ from './aquery.js';
+import { getJson } from './ajax.js';
 
 export function initializeAddTagToBookmark(){
 	//initialize variables
@@ -14,25 +15,19 @@ export function initializeAddTagToBookmark(){
 	$('[data-role="add-tag-button"]').on('click', function(e){
 		$(this).hide();
 
-		$.ajax({
-			url: '/api/tags/bookmark/' + bookmarkId + '/unused',
-			type: 'GET',
-			dataType: 'json',
-			success: function(response){
-				if(response.error){
-					return;
-				}
-				tagSelectTag.html('');
-				response.data.forEach(function(tag){
-						tagSelectTag.append(tagOptionTemplate.render({id: tag.id, name: tag.attributes.name}));
-					}
-				);
-				if(response.data.length == 0){
-					addTagContainer.addClass('error');
-				}
-
-				addTagContainer.show();
+		getJson(`/api/tags/bookmark/${bookmarkId}/unused`).then((data)=>{
+			tagSelectTag.html('');
+			data.forEach((tag)=>{
+				tagSelectTag.append(tagOptionTemplate.render({
+					id: tag.id, 
+					name: tag.attributes.name
+				}));
+			});
+			if(data.length == 0){
+				addTagContainer.addClass('error');
 			}
+
+			addTagContainer.show();
 		});
 	});
 	//reset tag select and add button
