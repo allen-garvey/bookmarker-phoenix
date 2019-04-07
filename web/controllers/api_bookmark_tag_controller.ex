@@ -12,8 +12,8 @@ defmodule Bookmarker.ApiBookmarkTagController do
 
     case Repo.insert(changeset) do
       {:ok, bookmark_tag} ->
-        tag = Repo.get!(Bookmarker.Tag, bookmark_tag.tag_id)
-        render(conn, "new_bookmark_tag.json", bookmark_tag: bookmark_tag, tag: tag)
+        bookmark_tag = Repo.preload(bookmark_tag, [:tag])
+        render(conn, "show.json", bookmark_tag: bookmark_tag)
       {:error, changeset} ->
         conn
         |> put_status(400)
@@ -39,7 +39,7 @@ defmodule Bookmarker.ApiBookmarkTagController do
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(bookmark_tag)
-    render(conn, "delete_bookmark_tag.json", bookmark_tag: bookmark_tag)
+    render(conn, "show.json", bookmark_tag: bookmark_tag)
   end
 
   @doc """
@@ -51,7 +51,7 @@ defmodule Bookmarker.ApiBookmarkTagController do
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
     Repo.delete!(bookmark_tag)
-    render(conn, "delete_bookmark_tag.json", bookmark_tag: bookmark_tag)
+    render(conn, "show.json", bookmark_tag: bookmark_tag)
   end
 
   @doc """

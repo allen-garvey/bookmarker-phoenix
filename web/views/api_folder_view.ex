@@ -2,8 +2,8 @@ defmodule Bookmarker.ApiFolderView do
   use Bookmarker.Web, :view
 
   @doc """
-  Returns JSON array of folders with count of bookmarks in 
-  http://jsonapi.org/ json api v1.0 format specification 
+  Returns JSON array of folders with count of bookmarks in
+  http://jsonapi.org/ json api v1.0 format specification
   """
   def render("index.json", %{folders: folders}) do
     %{
@@ -12,8 +12,8 @@ defmodule Bookmarker.ApiFolderView do
   end
 
   @doc """
-  Returns JSON array of bookmarks in 
-  http://jsonapi.org/ json api v1.0 format specification 
+  Returns JSON array of bookmarks in
+  http://jsonapi.org/ json api v1.0 format specification
   """
   def render("bookmarks_for_folder.json", %{bookmarks: bookmarks}) do
     %{

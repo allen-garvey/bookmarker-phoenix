@@ -12,7 +12,7 @@ defmodule Bookmarker.ApiTagController do
     used_tags_subquery = Repo.all(from(bt in Bookmarker.BookmarkTag, where: bt.bookmark_id == ^bookmark_id, select: bt.tag_id))
     query = from(t in Tag, where: not (t.id in ^used_tags_subquery))
     unused_tags = Repo.all(query)
-    render(conn, "tags_for_bookmark.json", tags: unused_tags)
+    render(conn, "tags.json", tags: unused_tags)
   end
 
 end

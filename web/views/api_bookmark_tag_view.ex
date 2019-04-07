@@ -1,30 +1,18 @@
 defmodule Bookmarker.ApiBookmarkTagView do
   use Bookmarker.Web, :view
+  alias Bookmarker.ApiBookmarkTagView
+  alias Bookmarker.ApiTagView
 
-  @doc """
-  Returns JSON object for newly created bookmark_tag
-  http://jsonapi.org/ json api v1.0 format specification 
-  """
-  def render("new_bookmark_tag.json", %{bookmark_tag: bookmark_tag, tag: tag}) do
+  def render("show.json", %{bookmark_tag: bookmark_tag}) do
     %{
-      data: bookmark_tag_json(bookmark_tag, tag)
+      data: render_one(bookmark_tag, ApiBookmarkTagView, "bookmark_tag_excerpt.json")
     }
   end
 
   @doc """
-  Returns JSON object for deleted bookmark_tag
-  http://jsonapi.org/ json api v1.0 format specification 
-  """
-  def render("delete_bookmark_tag.json", %{bookmark_tag: bookmark_tag}) do
-    %{
-      data: bookmark_tag_json(bookmark_tag, bookmark_tag.tag)
-    }
-  end
-
-  @doc """
-  Returns error response when 
+  Returns error response when
   invalid params for creating bookmark_tag
-  http://jsonapi.org/ json api v1.0 format specification 
+  http://jsonapi.org/ json api v1.0 format specification
   """
   def render("error.json", %{error: error}) do
     %{
@@ -34,7 +22,7 @@ defmodule Bookmarker.ApiBookmarkTagView do
 
   @doc """
   Returns error response when creating bookmark_tag fails
-  http://jsonapi.org/ json api v1.0 format specification 
+  http://jsonapi.org/ json api v1.0 format specification
   """
   def render("create_error.json", %{errors: errors}) do
     %{
@@ -42,15 +30,12 @@ defmodule Bookmarker.ApiBookmarkTagView do
     }
   end
 
-  def bookmark_tag_json(bookmark_tag, tag) do
+  # has to be api_bookmark_tag for render_one to work
+  def render("bookmark_tag_excerpt.json", %{api_bookmark_tag: bookmark_tag}) do
     %{
-      id: Integer.to_string(bookmark_tag.id),
-      type: "bookmark_tag",
-      attributes: %{
-        bookmark_id: Integer.to_string(bookmark_tag.bookmark_id),
-        tag_id: Integer.to_string(bookmark_tag.tag_id),
-        tag: Bookmarker.ApiTagView.tag_json(tag)
-      }
+      id: bookmark_tag.id,
+      bookmark_id: bookmark_tag.bookmark_id,
+      tag: ApiTagView.tag_excerpt(bookmark_tag.tag),
     }
   end
   @doc """

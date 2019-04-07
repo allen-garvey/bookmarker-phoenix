@@ -21,7 +21,7 @@ export function initializeAddTagToBookmark(){
 			data.forEach((tag)=>{
 				tagSelectTag.append(tagOptionTemplate.render({
 					id: tag.id, 
-					name: tag.attributes.name
+					name: tag.name
 				}));
 			});
 			if(data.length == 0){
@@ -52,10 +52,10 @@ export function initializeAddTagToBookmark(){
 			if(json.error){
 				return;
 			}
-			const tag = json.data.attributes.tag;
+			const tag = json.data.tag;
 			tagList.append(tagListItemTemplate.render({
 				tagId: tag.id, 
-				tagName: tag.attributes.name
+				tagName: tag.name
 			}));
 		});
 	});

@@ -1,23 +1,22 @@
 defmodule Bookmarker.ApiTagView do
   use Bookmarker.Web, :view
+  alias Bookmarker.ApiTagView
 
-  @doc """
-  Returns JSON array of tags in 
-  http://jsonapi.org/ json api v1.0 format specification 
-  """
-  def render("tags_for_bookmark.json", %{tags: tags}) do
+  def render("tags.json", %{tags: tags}) do
     %{
-      data: Enum.map(tags, &tag_json/1)
+      data: render_many(tags, ApiTagView, "tag_excerpt.json")
     }
   end
 
-  def tag_json(tag) do
+  # has to be api_tag for render_many to work
+  def render("tag_excerpt.json", %{api_tag: tag}) do
+    tag_excerpt(tag)
+  end
+
+  def tag_excerpt(tag) do
     %{
-      id: Integer.to_string(tag.id),
-      type: "tag",
-      attributes: %{
-        name: tag.name
-      }
+      id: tag.id,
+      name: tag.name,
     }
   end
 end
