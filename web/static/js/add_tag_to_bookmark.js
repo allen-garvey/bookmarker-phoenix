@@ -16,7 +16,7 @@ export function initializeAddTagToBookmark(){
 	$('[data-role="add-tag-button"]').on('click', function(event){
 		$(this).hide();
 
-		getJson(`/api/tags/bookmark/${bookmarkId}/unused`).then((data)=>{
+		getJson(`/api/bookmark/${bookmarkId}/tags/unused`).then((data)=>{
 			tagSelectTag.html('');
 			data.forEach((tag)=>{
 				tagSelectTag.append(tagOptionTemplate.render({
