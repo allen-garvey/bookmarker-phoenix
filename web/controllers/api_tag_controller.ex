@@ -18,12 +18,12 @@ defmodule Bookmarker.ApiTagController do
 
   def tags_for_bookmark(conn, %{"bookmark_id" => bookmark_id}) do
     tags = from(
-                      bt in BookmarkTag,
-                      where: bt.bookmark_id == ^bookmark_id,
-                      join: tag in assoc(bt, :tag),
-                      order_by: tag.name,
-                      select: tag
-                  )
+            bt in BookmarkTag,
+            where: bt.bookmark_id == ^bookmark_id,
+            join: tag in assoc(bt, :tag),
+            order_by: tag.name,
+            select: tag
+          )
           |> Repo.all
 
     render(conn, "tags.json", tags: tags)
