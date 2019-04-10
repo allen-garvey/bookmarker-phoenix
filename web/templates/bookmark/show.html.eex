@@ -76,3 +76,6 @@
     <div><button class="btn btn-danger btn-xs" data-role="remove-tag-button">Remove</button></div>
   </li>
 </script>
+
+<div id="bookmark_tag_list" data-bookmark-id="<%= @bookmark.id %>">
+</div>
