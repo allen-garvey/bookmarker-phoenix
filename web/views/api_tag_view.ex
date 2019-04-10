@@ -1,6 +1,7 @@
 defmodule Bookmarker.ApiTagView do
   use Bookmarker.Web, :view
   alias Bookmarker.ApiTagView
+  alias Bookmarker.Router.Helpers, as: Routes
 
   def render("tags.json", %{tags: tags}) do
     %{
@@ -17,6 +18,9 @@ defmodule Bookmarker.ApiTagView do
     %{
       id: tag.id,
       name: tag.name,
+      urls: %{
+        show: Routes.tag_path(Bookmarker.Endpoint, :show, tag.id)
+      }
     }
   end
 end
