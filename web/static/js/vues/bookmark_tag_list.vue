@@ -21,7 +21,7 @@
             <li class="list-group-item" v-for="tag in tags" :key="tag.id">
                 <div><a :href="tag.urls.show">{{tag.name}}</a></div>
                 <div>
-                    <button class="btn btn-danger btn-xs">Remove</button>
+                    <button class="btn btn-danger btn-xs" @click="removeTag(tag.id)">Remove</button>
                 </div>
             </li>
         </ul>
@@ -53,9 +53,15 @@ export default {
     },
     computed: {
     },
-    watch: {
-    },
     methods: {
+        removeTag(tagId){
+            const data = {bookmark_id: this.bookmarkId, tag_id: tagId};
+            sendJson('/api/bookmarks_tags/', 'DELETE', data).then((json)=>{
+                //don't need to do anything here, since we are optimistically assuming succeeeded
+            });
+            //optimistic remove
+            this.tags = this.tags.filter(tag=>tag.id !==tagId);
+        },
     }
 };
 </script>
