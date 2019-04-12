@@ -1,8 +1,3 @@
-import { initializeAddTagToBookmark } from './add_tag_to_bookmark.js';
-
-initializeAddTagToBookmark();
-
-
 import Vue from 'vue';
 import BookmarkTagList from './vues/bookmark_tag_list.vue';
 
