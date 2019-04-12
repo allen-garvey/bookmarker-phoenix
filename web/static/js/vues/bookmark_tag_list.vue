@@ -4,17 +4,22 @@
             <li class="list-group-item list-group-item-info">
             <div class="tag-list-header">
                 <h4>Tags</h4>
-                <div><button class="btn btn-success">Add</button></div>
-            </div>
-            <div class="add-tag-container">
-                <div class="add-tag-select-container">
-                <select class="form-control tag-select"></select>
                 <div>
-                    <button class="btn btn-default">Cancel</button>
-                    <button class="btn btn-success">Save</button>
+                    <button class="btn btn-success" @click="addButtonAction()" :disabled="busy" v-show="!addTagMode">Add</button>
                 </div>
+            </div>
+            <div class="add-tag-container" v-show="addTagMode">
+                <div class="add-tag-select-container" v-show="tagsThatCanBeAdded.length > 0">
+                    <select class="form-control tag-select" ref="tagSelect">
+                        <option v-for="tag in tagsThatCanBeAdded" :key="tag.id">{{tag.name}}</option>
+                    </select>
+                    <div>
+                        <button class="btn btn-default" @click="cancelButtonAction()">Cancel</button>
+                        <button class="btn btn-success" @click="saveButtonAction()" :disabled="busy">Save</button>
+                    </div>
                 </div>
-                <div class="add-tag-alert alert alert-warning">
+                <div class="add-tag-alert alert alert-warning" v-show="tagsThatCanBeAdded.length === 0">
+                    This bookmark has already been tagged with all available tags. <a href="/tags/new">Want to create more?</a>
                 </div>
             </div>
             </li>
@@ -49,11 +54,40 @@ export default {
         return {
             initialLoadComplete: false,
             tags: [],
+            tagsThatCanBeAdded: [],
+            addTagMode: false,
+            busy: false,
         };
     },
     computed: {
     },
     methods: {
+        addButtonAction(){
+            this.busy = true;
+            getJson(`/api/bookmarks/${this.bookmarkId}/tags/unused`).then((data)=>{
+                this.tagsThatCanBeAdded = data;
+                this.addTagMode = true;
+                this.busy = false;
+            });
+        },
+        cancelButtonAction(){
+            this.addTagMode = false;
+        },
+        saveButtonAction(){
+            const selectedTag = this.tagsThatCanBeAdded[this.$refs.tagSelect.selectedIndex];
+            this.busy = true;
+            const data = {bookmark_id: this.bookmarkId, tag_id: selectedTag.id};
+
+            sendJson('/api/bookmarks_tags/', 'POST', data).then((json)=>{
+                this.busy = false;
+                if(json.error){
+                    console.log(json.error);
+                    return;
+                }
+                this.addTagMode = false;
+                this.tags.push(selectedTag);
+            });
+        },
         removeTag(tagId){
             const data = {bookmark_id: this.bookmarkId, tag_id: tagId};
             sendJson('/api/bookmarks_tags/', 'DELETE', data).then((json)=>{
