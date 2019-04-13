@@ -36,6 +36,7 @@
 </div>
 
 <div id="bookmark_tag_list" 
+  data-csrf-token="<%= @csrf_token %>"
   data-bookmark-id="<%= @bookmark.id %>"
   data-new-tag-url="<%= tag_path(@conn, :new) %>"
   data-new-bookmark-tag-url="<%= api_bookmark_tag_path(@conn, :create_bookmark_tag) %>"

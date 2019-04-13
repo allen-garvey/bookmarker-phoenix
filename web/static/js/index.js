@@ -8,6 +8,7 @@ import BookmarkTagList from './vues/bookmark_tag_list.vue';
     if(bookmarkTagListContainer){
         const props = {};
         [
+            'csrfToken',
             'bookmarkId', 
             'newTagUrl', 
             'newBookmarkTagUrl', 

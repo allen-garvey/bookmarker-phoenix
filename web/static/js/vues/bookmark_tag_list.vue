@@ -39,6 +39,10 @@ import { getJson, sendJson } from '../ajax.js';
 export default {
     name: 'bookmark-tag-list',
     props: {
+        csrfToken: {
+            type: String,
+            required: true,
+        },
         bookmarkId: {
             type: String,
             required: true,
@@ -98,7 +102,7 @@ export default {
             this.busy = true;
             const data = {bookmark_id: this.bookmarkId, tag_id: selectedTag.id};
 
-            sendJson(this.newBookmarkTagUrl, 'POST', data).then((json)=>{
+            sendJson(this.newBookmarkTagUrl, this.csrfToken, 'POST', data).then((json)=>{
                 this.busy = false;
                 if(json.error){
                     console.log(json.error);
@@ -110,7 +114,7 @@ export default {
         },
         removeTag(tagId){
             const data = {bookmark_id: this.bookmarkId, tag_id: tagId};
-            sendJson(this.deleteBookmarkTagUrl, 'DELETE', data).then((json)=>{
+            sendJson(this.deleteBookmarkTagUrl, this.csrfToken, 'DELETE', data).then((json)=>{
                 //don't need to do anything here, since we are optimistically assuming succeeeded
             });
             //optimistic remove
