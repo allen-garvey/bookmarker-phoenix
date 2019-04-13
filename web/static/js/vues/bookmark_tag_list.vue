@@ -47,9 +47,25 @@ export default {
             type: String,
             required: true,
         },
+        newBookmarkTagUrl: {
+            type: String,
+            required: true,
+        },
+        deleteBookmarkTagUrl: {
+            type: String,
+            required: true,
+        },
+        tagsUrl: {
+            type: String,
+            required: true,
+        },
+        unusedTagsUrl: {
+            type: String,
+            required: true,
+        },
     },
     created(){
-        getJson(`/api/bookmarks/${this.bookmarkId}/tags`).then((data)=>{
+        getJson(this.tagsUrl).then((data)=>{
             this.tags = data;
             this.initialLoadComplete = true;
         });
@@ -68,7 +84,7 @@ export default {
     methods: {
         addButtonAction(){
             this.busy = true;
-            getJson(`/api/bookmarks/${this.bookmarkId}/tags/unused`).then((data)=>{
+            getJson(this.unusedTagsUrl).then((data)=>{
                 this.tagsThatCanBeAdded = data;
                 this.addTagMode = true;
                 this.busy = false;
@@ -82,7 +98,7 @@ export default {
             this.busy = true;
             const data = {bookmark_id: this.bookmarkId, tag_id: selectedTag.id};
 
-            sendJson('/api/bookmarks_tags/', 'POST', data).then((json)=>{
+            sendJson(this.newBookmarkTagUrl, 'POST', data).then((json)=>{
                 this.busy = false;
                 if(json.error){
                     console.log(json.error);
@@ -94,7 +110,7 @@ export default {
         },
         removeTag(tagId){
             const data = {bookmark_id: this.bookmarkId, tag_id: tagId};
-            sendJson('/api/bookmarks_tags/', 'DELETE', data).then((json)=>{
+            sendJson(this.deleteBookmarkTagUrl, 'DELETE', data).then((json)=>{
                 //don't need to do anything here, since we are optimistically assuming succeeeded
             });
             //optimistic remove

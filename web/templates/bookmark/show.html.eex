@@ -38,4 +38,8 @@
 <div id="bookmark_tag_list" 
   data-bookmark-id="<%= @bookmark.id %>"
   data-new-tag-url="<%= tag_path(@conn, :new) %>"
+  data-new-bookmark-tag-url="<%= api_bookmark_tag_path(@conn, :create_bookmark_tag) %>"
+  data-delete-bookmark-tag-url="<%= api_bookmark_tag_path(@conn, :delete_bookmark_tag) %>"
+  data-unused-tags-url="<%= api_tag_path(@conn, :unused_tags_for_bookmark, @bookmark.id) %>"
+  data-tags-url="<%= api_tag_path(@conn, :tags_for_bookmark, @bookmark.id) %>"
 ></div>
