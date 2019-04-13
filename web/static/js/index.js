@@ -7,10 +7,14 @@ import BookmarkTagList from './vues/bookmark_tag_list.vue';
 
     if(bookmarkTagListContainer){
         const bookmarkId = bookmarkTagListContainer.dataset.bookmarkId;
+        const newTagUrl = bookmarkTagListContainer.dataset.newTagUrl;
 
         new Vue({
             el: bookmarkTagListContainer,
-            render: h => h(BookmarkTagList, {props: {bookmarkId}}),
+            render: h => h(BookmarkTagList, {props: {
+                bookmarkId,
+                newTagUrl,
+            }}),
         });
     }
 })();

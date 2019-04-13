@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="add-tag-alert alert alert-warning" v-show="tagsThatCanBeAdded.length === 0">
-                    This bookmark has already been tagged with all available tags. <a href="/tags/new">Want to create more?</a>
+                    This bookmark has already been tagged with all available tags. <a :href="newTagUrl">Want to create more?</a>
                 </div>
             </div>
             </li>
@@ -40,6 +40,10 @@ export default {
     name: 'bookmark-tag-list',
     props: {
         bookmarkId: {
+            type: String,
+            required: true,
+        },
+        newTagUrl: {
             type: String,
             required: true,
         },

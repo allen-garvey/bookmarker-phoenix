@@ -35,5 +35,7 @@
   end %>
 </div>
 
-<div id="bookmark_tag_list" data-bookmark-id="<%= @bookmark.id %>">
-</div>
+<div id="bookmark_tag_list" 
+  data-bookmark-id="<%= @bookmark.id %>"
+  data-new-tag-url="<%= tag_path(@conn, :new) %>"
+></div>
