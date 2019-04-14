@@ -2,8 +2,8 @@
 	<%= if length(@bookmarks) == 0 do %>
 		<%= @no_bookmarks_message %>
 	<% else %>
+		<h4>Bookmarks</h4>
 		<ul class="list-group folder-bookmark-list">
-			<li class="list-group-item list-group-item-info"><h4>Bookmarks</h4></li>
 			<%= for bookmark <- @bookmarks do %>
 				<li class="list-group-item bookmark-item <%= if !is_nil(bookmark.preview_image_selector) do "list-group-item-success preview-enabled" end %>">
 					<div>

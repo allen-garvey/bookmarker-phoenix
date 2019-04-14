@@ -30,9 +30,12 @@
 }
 
 .folder-bookmark-list{
-	.bookmark-item{
-		display: flex;
-		justify-content: space-between;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 0;
+	.list-group-item{
+		border: none;
 	}
 	.bookmark-thumbnail-container{
 		width: 300px;
