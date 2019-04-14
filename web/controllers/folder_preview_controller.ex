@@ -45,7 +45,7 @@ defmodule Bookmarker.FolderPreviewController do
   end
 
   def html_body(url) do
-    case HTTPoison.get(url) do
+    case HTTPoison.get(url, [], [follow_redirect: true, max_redirect: 4]) do
         {:ok, resp} ->
             resp.body
         {:error, _error} ->
